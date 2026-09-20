@@ -1,0 +1,3095 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avaliação de Entomologia Agrícola | EEEP Monsenhor Odorico de Andrade</title>
+  <style>
+    :root {
+      --primary: #1b5e20;
+      --primary-light: #2e7d32;
+      --primary-dark: #0d3b10;
+      --accent: #f57f17;
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --text: #212121;
+      --text-muted: #555555;
+      --border: #dcdcdc;
+      --danger: #c62828;
+      --warning: #ef6c00;
+      --success: #2e7d32;
+      --shadow: 0 4px 16px rgba(0,0,0,0.08);
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 22px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    }
+
+    header h1 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      opacity: 0.92;
+      margin-top: 5px;
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 950px;
+      margin: 28px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #2a2a2a;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #fff;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-light);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: #e8f5e9;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #b71c1c;
+    }
+
+    .btn-sm {
+      padding: 7px 14px;
+      font-size: 0.85rem;
+    }
+
+    .quiz-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      padding-bottom: 16px;
+      border-bottom: 1.5px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .quiz-info {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .quiz-info strong {
+      color: var(--primary);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #e5e5e5;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .question-badge {
+      display: inline-block;
+      background: #e8f5e9;
+      color: var(--primary);
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+    }
+
+    .context-block {
+      background: #f9fbf9;
+      border-left: 4px solid var(--primary);
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.98rem;
+      line-height: 1.65;
+      color: #333333;
+      text-align: justify;
+    }
+
+    .question-prompt {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.55;
+      margin-bottom: 22px;
+      color: #111111;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 15px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #ffffff;
+    }
+
+    .option-item:hover {
+      background-color: #f1f8e9;
+      border-color: var(--primary-light);
+    }
+
+    .option-item.selected {
+      background-color: #e8f5e9;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+
+    .option-letter {
+      font-weight: 800;
+      color: var(--primary);
+      min-width: 26px;
+      font-size: 1rem;
+    }
+
+    .option-text {
+      flex: 1;
+      font-size: 0.96rem;
+      line-height: 1.5;
+      color: #2c2c2c;
+    }
+
+    .nav-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Quadro de Notas por Capítulo */
+    .grade-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .grade-box {
+      background: #ffffff;
+      border: 1.5px solid #c8e6c9;
+      border-radius: 8px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    .grade-box.pending {
+      border-color: #ffe082;
+      background: #fffdf7;
+    }
+
+    .grade-box-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .grade-box-score {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 2px;
+    }
+
+    .grade-box.pending .grade-box-score {
+      color: #ef6c00;
+      font-size: 0.95rem;
+    }
+
+    .final-score-banner {
+      background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+      border: 2px solid var(--primary);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 16px;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      max-width: 950px;
+      width: 100%;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 16px 45px rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 16px 22px;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .modal-toolbar {
+      padding: 12px 20px;
+      background: #f1f5f2;
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .modal-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: #e0e0e0;
+      border: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #333;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .modal-body {
+      padding: 28px 32px;
+      overflow-y: auto;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #2b2b2b;
+      flex: 1;
+      text-align: justify;
+    }
+
+    .full-chapter {
+      display: none;
+    }
+
+    .full-chapter.active {
+      display: block;
+    }
+
+    .full-chapter h2 {
+      color: var(--primary-dark);
+      font-size: 1.45rem;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 8px;
+    }
+
+    .full-chapter h3 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin: 24px 0 10px 0;
+    }
+
+    .full-chapter p {
+      margin-bottom: 14px;
+    }
+
+    .full-chapter ul, .full-chapter ol {
+      margin-left: 26px;
+      margin-bottom: 16px;
+    }
+
+    .full-chapter li {
+      margin-bottom: 6px;
+    }
+
+    .full-chapter blockquote {
+      background: #f1f8e9;
+      border-left: 4px solid var(--primary);
+      padding: 12px 18px;
+      margin: 16px 0;
+      font-style: italic;
+      color: #2e7d32;
+    }
+
+    .modal-footer {
+      padding: 12px 22px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fafafa;
+      flex-shrink: 0;
+    }
+
+    .alert-banner {
+      background-color: #ffebee;
+      color: var(--danger);
+      padding: 12px 16px;
+      border-radius: 8px;
+      border-left: 4px solid var(--danger);
+      font-size: 0.92rem;
+      margin-bottom: 22px;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .kpi-num {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .kpi-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.92rem;
+    }
+
+    th, td {
+      padding: 13px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background-color: #f5f5f5;
+      font-weight: 700;
+      color: #333;
+    }
+
+    tr:hover {
+      background-color: #fafafa;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .badge-success { background: #e8f5e9; color: #2e7d32; }
+    .badge-danger { background: #ffebee; color: #c62828; }
+    .badge-warning { background: #fff3e0; color: #ef6c00; }
+    .badge-info { background: #e1f5fe; color: #0277bd; }
+
+    .empty-state {
+      text-align: center;
+      padding: 35px 20px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .question-miss-item {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .question-miss-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      line-height: 1.45;
+    }
+
+    .question-miss-bar-bg {
+      height: 8px;
+      background: #eeeeee;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .question-miss-bar-fill {
+      height: 100%;
+      background: var(--danger);
+    }
+
+    .section-divider {
+      margin: 36px 0 20px 0;
+      border-top: 2px dashed #e0e0e0;
+      padding-top: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Entomologia Agrícola</h1>
+    <p>EEEP Monsenhor Odorico de Andrade • Curso Técnico em Agropecuária • Prof. Charles Lobo Pinheiro</p>
+  </header>
+
+  <main>
+    <!-- VIEW 1: ACESSO AO SISTEMA -->
+    <div id="view-login" class="card">
+      <h2 style="margin-bottom: 14px; color: var(--primary);">Acesso à Plataforma de Avaliação</h2>
+      <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; line-height: 1.5;">
+        Preencha sua identificação completa, selecione o capítulo a ser avaliado e insira a palavra-chave informada pelo docente em sala. Você pode tentar várias vezes; sua nota final será a <strong>média aritmética da maior nota de cada um dos 4 capítulos</strong>.
+      </p>
+
+      <div id="login-firebase-banner" class="alert-banner" style="display: none;">
+        ⚠️ O sistema ainda não foi conectado ao banco de dados online. Avise o professor responsável.
+      </div>
+      <div id="login-error" class="alert-banner" style="display: none;"></div>
+
+      <div class="form-group">
+        <label for="input-name">Nome Completo do Estudante</label>
+        <input type="text" id="input-name" placeholder="Insira seu nome completo" autocomplete="off" />
+      </div>
+
+      <div class="form-group">
+        <label for="input-quiz">Capítulo do Quiz</label>
+        <select id="input-quiz">
+          <option value="cap1">Capítulo 1 - Introdução e Importância da Entomologia</option>
+          <option value="cap2">Capítulo 2 - Ordens e Características dos Insetos</option>
+          <option value="cap3">Capítulo 3 - Coleção de Insetos</option>
+          <option value="cap4">Capítulo 4 - Reprodução e Desenvolvimento dos Insetos</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="input-keyword">Palavra-chave de Acesso</label>
+        <input type="password" id="input-keyword" placeholder="Digite a palavra-chave autorizada" />
+      </div>
+
+      <button class="btn btn-primary" onclick="handleLogin()">Entrar / Iniciar Avaliação</button>
+    </div>
+
+    <!-- VIEW 2: EXECUÇÃO DO QUIZ -->
+    <div id="view-quiz" class="card" style="display: none;">
+      <div class="quiz-bar">
+        <div class="quiz-info">
+          Estudante: <strong id="bar-student-name">-</strong> |
+          <span id="bar-quiz-title">-</span>
+        </div>
+        <button id="btn-open-apostila" class="btn btn-outline btn-sm" onclick="openApostilaModal()">
+          📖 Ler Apostila Completa (Consulta Autorizada)
+        </button>
+      </div>
+
+      <div class="progress-track">
+        <div id="quiz-progress-bar" class="progress-fill"></div>
+      </div>
+
+      <div class="question-badge">
+        Questão <span id="q-current-index">1</span> de <span id="q-total-count">10</span>
+      </div>
+
+      <div id="q-context" class="context-block">Carregando contextualização técnica...</div>
+      <div id="q-prompt" class="question-prompt">Carregando enunciado...</div>
+      <div id="q-options" class="options-list"></div>
+
+      <div class="nav-actions">
+        <span id="quiz-warning-text" style="font-size: 0.85rem; color: var(--danger); font-weight: 600;">
+          ⚠️ Não saia desta página nem alterne de aplicativo. Isso anulará a tentativa atual com nota zero.
+        </span>
+        <button id="btn-next" class="btn btn-primary" style="width: auto; min-width: 150px;" onclick="nextQuestion()">
+          Avançar
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW 3: RESULTADOS INDIVIDUAIS -->
+    <div id="view-result" class="card" style="display: none; text-align: center;">
+      <h2 id="res-title" style="color: var(--primary); margin-bottom: 12px;">Avaliação Finalizada!</h2>
+      <p id="res-subtitle" style="color: var(--text-muted); margin-bottom: 20px;">Confira a síntese do seu rendimento e sua situação geral na disciplina.</p>
+
+      <div id="res-stats-container" style="background: #fafafa; border: 1.5px solid var(--border); border-radius: 12px; padding: 22px; max-width: 480px; margin: 0 auto 24px auto;">
+        <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 2px;">Nota Desta Tentativa</div>
+        <div id="res-score" style="font-size: 2.8rem; font-weight: 800; color: var(--primary);">0.0</div>
+        <div id="res-percent" style="font-size: 0.92rem; font-weight: 700; color: var(--primary-dark); margin-top: 2px;">0% de rendimento</div>
+        
+        <div style="margin-top: 18px; text-align: left;">
+          <span style="font-size: 0.85rem; font-weight: 700; color: #444; text-transform: uppercase;">Quadro de Maiores Notas por Capítulo:</span>
+          <div class="grade-grid">
+            <div id="box-c1" class="grade-box"><div class="grade-box-title">Cap. 1</div><div class="grade-box-score" id="score-c1">-</div></div>
+            <div id="box-c2" class="grade-box"><div class="grade-box-title">Cap. 2</div><div class="grade-box-score" id="score-c2">-</div></div>
+            <div id="box-c3" class="grade-box"><div class="grade-box-title">Cap. 3</div><div class="grade-box-score" id="score-c3">-</div></div>
+            <div id="box-c4" class="grade-box"><div class="grade-box-title">Cap. 4</div><div class="grade-box-score" id="score-c4">-</div></div>
+          </div>
+        </div>
+
+        <div class="final-score-banner">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--primary-dark); text-transform: uppercase;">Nota Final Acumulada (Média dos 4 Capítulos)</div>
+          <div id="res-final-average" style="font-size: 2.4rem; font-weight: 900; color: var(--primary);">0.0</div>
+          <div id="res-final-status" style="font-size: 0.88rem; font-weight: 700; margin-top: 2px;">Situação: Em Andamento</div>
+        </div>
+      </div>
+
+      <div id="res-message" style="margin-bottom: 28px; font-size: 1rem; line-height: 1.6; color: #333;"></div>
+
+      <button class="btn btn-primary" style="max-width: 260px; margin: 0 auto;" onclick="returnToLogin()">
+        Retornar à Página Inicial
+      </button>
+    </div>
+
+    <!-- VIEW 4: PAINEL DOCENTE -->
+    <div id="view-teacher" class="card" style="display: none;">
+      <div class="dashboard-header">
+        <div>
+          <h2 style="color: var(--primary);">Painel de Acompanhamento Docente</h2>
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Relatório analítico em tempo real alimentado pelas tentativas e acessos dos alunos</p>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn btn-outline btn-sm" onclick="exportDataCSV()">📥 Exportar Notas Finais (CSV)</button>
+          <button class="btn btn-outline btn-sm" onclick="exportTestRecordsCSV()">📥 Exportar Lista de Testes (CSV)</button>
+          <button class="btn btn-danger btn-sm" onclick="clearAllData()">🗑️ Limpar Banco</button>
+          <button class="btn btn-outline btn-sm" onclick="returnToLogin()">Encerrar Sessão</button>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: ALUNOS FAZENDO A PROVA AGORA (TEMPO REAL) -->
+      <div style="background: #fff8e1; border: 1.5px solid #ffca28; border-radius: 10px; padding: 20px; margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+          <div>
+            <h3 style="color: #8d6e00; font-size: 1.15rem; margin-bottom: 4px;">
+              🟢 Alunos Conectados Fazendo a Prova Agora
+            </h3>
+            <p style="font-size: 0.85rem; color: #555;">
+              Atualização automática em tempo real. Um aluno some da lista se ficar mais de 25s sem conexão.
+            </p>
+          </div>
+          <div class="kpi-card" style="background: #ffffff; min-width: 110px;">
+            <div id="kpi-online-now" class="kpi-num" style="color: #8d6e00;">0</div>
+            <div class="kpi-label">Online agora</div>
+          </div>
+        </div>
+        <div style="overflow-x: auto; background: #ffffff; border-radius: 8px; border: 1px solid var(--border);">
+          <table>
+            <thead>
+              <tr>
+                <th>Estudante</th>
+                <th>Capítulo</th>
+                <th>Questão Atual</th>
+                <th>Conectado há</th>
+              </tr>
+            </thead>
+            <tbody id="online-now-table-body">
+              <tr><td colspan="4" class="empty-state">Nenhum estudante conectado no momento.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="firebase-setup-banner" class="alert-banner" style="display: none; margin-bottom: 24px;">
+        ⚠️ O banco de dados em tempo real (Firebase) ainda não foi configurado neste arquivo. Preencha o objeto
+        <code>firebaseConfig</code> no código-fonte com os dados do seu projeto Firebase para habilitar o
+        funcionamento com múltiplos alunos simultâneos.
+      </div>
+
+      <!-- SEÇÃO EXCLUSIVA: REGISTRO DE QUEM ACESSOU COM A PALAVRA-CHAVE TESTE -->
+      <div style="background: #eef7ee; border: 1.5px solid var(--primary-light); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="color: var(--primary-dark); font-size: 1.15rem; margin-bottom: 4px;">
+              📋 Confirmação de Acessos de Teste (Palavra-chave: teste)
+            </h3>
+            <p style="font-size: 0.85rem; color: #444;">
+              Estudantes que realizaram a verificação de conectividade técnica.
+            </p>
+          </div>
+          <button class="btn btn-danger btn-sm" style="background: #e57373;" onclick="clearTestRecords()">Limpar Lista de Teste</button>
+        </div>
+
+        <div class="kpi-grid" style="margin-top: 14px; margin-bottom: 16px;">
+          <div class="kpi-card" style="background: #ffffff;">
+            <div id="kpi-test-total" class="kpi-num" style="color: var(--primary);">0</div>
+            <div class="kpi-label">Total que Acessou com "teste"</div>
+          </div>
+          <div class="kpi-card" style="background: #ffffff;">
+            <div id="kpi-test-success" class="kpi-num" style="color: var(--success);">0</div>
+            <div class="kpi-label">Responderam "Sim" (Conseguiram)</div>
+          </div>
+          <div class="kpi-card" style="background: #ffffff;">
+            <div id="kpi-test-issues" class="kpi-num" style="color: var(--danger);">0</div>
+            <div class="kpi-label">Responderam "Não" (Com Dificuldade)</div>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto; background: #ffffff; border-radius: 8px; border: 1px solid var(--border);">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nome do Estudante</th>
+                <th>Resposta</th>
+                <th>Data e Horário</th>
+                <th>Situação de Acesso</th>
+              </tr>
+            </thead>
+            <tbody id="test-records-table-body">
+              <tr>
+                <td colspan="5" class="empty-state">Nenhum acesso de teste registrado até o momento.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- SEÇÃO OFICIAL DE AVALIAÇÕES E NOTAS -->
+      <h3 style="color: var(--primary); margin-bottom: 14px;">Métricas Oficiais de Rendimento da Turma</h3>
+      
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div id="kpi-total-attempts" class="kpi-num">0</div>
+          <div class="kpi-label">Tentativas Concluídas (Oficiais)</div>
+        </div>
+        <div class="kpi-card">
+          <div id="kpi-class-avg" class="kpi-num">0.0</div>
+          <div class="kpi-label">Média Geral da Turma (Notas Finais)</div>
+        </div>
+        <div class="kpi-card">
+          <div id="kpi-fraud-count" class="kpi-num" style="color: var(--danger);">0</div>
+          <div class="kpi-label">Tentativas Anuladas (Saídas)</div>
+        </div>
+        <div class="kpi-card">
+          <div id="kpi-active-students" class="kpi-num">0</div>
+          <div class="kpi-label">Estudantes Únicos Avaliados</div>
+        </div>
+      </div>
+
+      <h3 style="color: var(--primary); margin: 26px 0 14px 0;">Diagnóstico: Questões Mais Erradas pela Turma</h3>
+      <div id="most-missed-questions-container">
+        <div class="empty-state">
+          Nenhum registro localizado. Os indicadores surgirão automaticamente conforme os estudantes realizarem os questionários.
+        </div>
+      </div>
+
+      <h3 style="color: var(--primary); margin: 32px 0 14px 0;">Classificação Geral da Turma (Ranking pela Nota Final)</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">A Nota Final corresponde rigorosamente à média aritmética da maior nota de cada um dos 4 capítulos.</p>
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Posição</th>
+              <th>Estudante</th>
+              <th>Cap. 1</th>
+              <th>Cap. 2</th>
+              <th>Cap. 3</th>
+              <th>Cap. 4</th>
+              <th>Nota Final</th>
+              <th>Tentativas</th>
+              <th>Situação</th>
+            </tr>
+          </thead>
+          <tbody id="ranking-table-body">
+            <tr>
+              <td colspan="9" class="empty-state">Nenhum registro de avaliação localizado no sistema.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL: LEITOR INTEGRAL DA APOSTILA (SEM BARRA DE PESQUISA RÁPIDA) -->
+  <div id="modal-apostila" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="color: white; margin: 0; font-size: 1.15rem;">Apostila Técnica de Entomologia Agrícola — Consulta Integral</h3>
+        <button onclick="closeApostilaModal()" style="background: none; border: none; color: white; font-size: 1.6rem; cursor: pointer;">&times;</button>
+      </div>
+
+      <div class="modal-toolbar">
+        <div class="modal-tabs">
+          <button id="tab-c1" class="tab-btn active" onclick="switchFullChapter('cap1')">Capítulo 1</button>
+          <button id="tab-c2" class="tab-btn" onclick="switchFullChapter('cap2')">Capítulo 2</button>
+          <button id="tab-c3" class="tab-btn" onclick="switchFullChapter('cap3')">Capítulo 3</button>
+          <button id="tab-c4" class="tab-btn" onclick="switchFullChapter('cap4')">Capítulo 4</button>
+        </div>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">
+          📖 Leitura sequencial do material didático oficial
+        </span>
+      </div>
+
+      <div class="modal-body" id="apostila-body">
+        
+        <!-- CAPÍTULO 1 INTEGRAL -->
+        <article class="full-chapter active" id="text-cap1">
+          <h2>CAPÍTULO 1 - INTRODUÇÃO E IMPORTÂNCIA DA ENTOMOLOGIA</h2>
+          
+          <h3>1.1 O que é Entomologia</h3>
+          <p>A palavra Entomologia tem origem grega: <em>entomon</em> (inseto, literalmente "cortado em segmentos") e <em>logos</em> (estudo, tratado)[cite: 1]. Trata-se, portanto, do ramo da Zoologia dedicado ao estudo dos insetos — sua morfologia, fisiologia, ecologia, evolução, taxonomia, distribuição geográfica e relações com as atividades humanas[cite: 1].</p>
+          <p>Dentro da ciência entomológica, estruturam-se campos especializados de atuação prática[cite: 1]:</p>
+          <ul>
+            <li><strong>Taxonomia entomológica:</strong> descrição, classificação sistemática e identificação botânico-zoológica das espécies de insetos[cite: 1].</li>
+            <li><strong>Entomologia agrícola:</strong> aplicação agronômica direta focada nos insetos que atacam plantas cultivadas, inimigos naturais (predadores e parasitoides) e polinizadores[cite: 1].</li>
+            <li><strong>Entomologia florestal:</strong> estudo dos insetos fitófagos e desfolhadores associados a maciços florestais e espécies lenhosas[cite: 1].</li>
+            <li><strong>Entomologia médica e veterinária:</strong> investigação de espécies vetoras de agentes etiológicos ao ser humano e animais domésticos[cite: 1].</li>
+            <li><strong>Entomologia forense:</strong> análise de insetos necrófagos para estimativa do intervalo pós-morte em perícias criminológicas[cite: 1].</li>
+            <li><strong>Apicultura e meliponicultura:</strong> criação racional de abelhas com ferrão (<em>Apis</em>) e sem ferrão (meliponíneos), respectivamente[cite: 1].</li>
+          </ul>
+
+          <h3>1.2 Objetivos da Entomologia Agrícola</h3>
+          <p>No ensino técnico em Agropecuária, a disciplina visa capacitar o profissional para identificar táxons fitófagos em lavouras e produtos armazenados, diferenciar pragas de agentes de controle biológico e interpretar o ciclo biológico para determinar a fase suscetível das culturas[cite: 1].</p>
+
+          <h3>1.3 Diversidade Entomológica e Realidade Agroecológica</h3>
+          <p>Os insetos superam 1 milhão de espécies descritas, com estimativas reais oscilando entre 2,5 e 10 milhões de espécies no planeta[cite: 1]. Do total catalogado, <strong>menos de 10.000 espécies são consideradas prejudiciais</strong> às atividades socioeconômicas humanas, demonstrando que <strong>menos de 1% do filo causa danos reais</strong>[cite: 1]. A generalização de que insetos representam pragas é um equívoco biológico, visto que a expressiva maioria sustenta funções vitais na ciclagem de nutrientes, polinização e equilíbrio de cadeias tróficas[cite: 1].</p>
+
+          <h3>1.4 Impacto Histórico dos Insetos na Sociedade</h3>
+          <p><strong>Construção do Canal do Panamá (1881–1914):</strong> A tentativa inicial francesa faliu devido à perda de mais de 27.000 vidas decorrentes da <strong>malária</strong> e da febre amarela[cite: 1]. A malária é transmitida por <strong>fêmeas hematófagas de mosquitos do gênero <em>Anopheles</em></strong>, que introduzem o esporozoíto do protozoário <strong><em>Plasmodium</em></strong> durante a alimentação necessária à ovogênese[cite: 1]. O término da construção somente se viabilizou após a erradicação de focos larvários e medidas de engenharia sanitária executadas sob a gestão de William Gorgas[cite: 1].</p>
+          <p><strong>A Peste Negra:</strong> Pandemia europeia que dizimou um terço do continente no século XIV, disseminada pela picada da <strong>pulga do rato (<em>Xenopsylla cheopis</em>)</strong>, parasita do <strong>rato-preto (<em>Rattus rattus</em>)</strong>, a qual transmite o agente bacteriano <strong><em>Yersinia pestis</em></strong>[cite: 1].</p>
+          <p><strong>Gafanhotos Migratórios (Orthoptera: Acrididae):</strong> Formações gregárias gigantescas capazes de consumir toneladas de biomassa vegetal verde em poucas horas, determinando historicamente colapsos na produção de grãos e fome generalizada em vários continentes[cite: 1].</p>
+
+          <h3>1.5 Serviços Ambientais, Produtos Comerciais e Entomofagia</h3>
+          <ul>
+            <li><strong>Polinização:</strong> Cerca de <strong>75% das culturas agrícolas alimentares</strong> cultivadas no mundo dependem da polinização entomófila para a fixação e formação de frutos e sementes viáveis[cite: 1].</li>
+            <li><strong>Produtos Comerciais:</strong> Fios de seda pura sintetizados pelas glândulas sericígenas da lagarta <strong><em>Bombyx mori</em></strong> (Lepidoptera); corante natural carmim derivado do ácido carmínico da cochonilha <strong><em>Dactylopius coccus</em></strong> (Hemiptera); mel, pólen, geleia real e cera produzidos por <em>Apis mellifera</em>[cite: 1].</li>
+            <li><strong>Entomofagia (FAO, 2013):</strong> Consumo documentado de mais de <strong>1.900 espécies</strong> de insetos, destacando-se as ordens <strong>Coleoptera, Lepidoptera, Hymenoptera e Orthoptera</strong>, caracterizadas por alto rendimento proteico e conversão alimentar superior aos animais de grande porte[cite: 1].</li>
+            <li><strong>Perdas Pós-Colheita:</strong> Ataques de insetos em silos e tulhas respondem por perdas estimadas entre <strong>10% e 20% da produção estocada</strong> em nações em desenvolvimento[cite: 1].</li>
+            <li><strong>Diversificação Vegetal:</strong> Consórcios e rotações quebram a continuidade temporal e espacial do alimento das pragas, favorecendo a colonização e permanência de inimigos naturais[cite: 1].</li>
+          </ul>
+        </article>
+
+        <!-- CAPÍTULO 2 INTEGRAL -->
+        <article class="full-chapter" id="text-cap2">
+          <h2>CAPÍTULO 2 - ORDENS E CARACTERÍSTICAS DOS INSETOS</h2>
+
+          <h3>2.1 Sistemática de Arthropoda e Diagnose de Insecta</h3>
+          <p>Os insetos pertencem ao Reino Animalia, Filo Arthropoda, Subfilo Hexapoda e Classe Insecta[cite: 1]. Os artrópodes compartilham metameria heterônoma (tagmose), apêndices articulados, simetria bilateral, <strong>exoesqueleto quitinoso</strong> submetido a mudas periódicas (ecdises), tubo digestivo completo, circulação aberta com vaso dorsal pulsátil e sistema respiratório traqueal nas formas terrestres[cite: 1].</p>
+          <p>A Classe Insecta é caracterizada exclusivamente por[cite: 1]:</p>
+          <ul>
+            <li>Divisão corpórea em <strong>três tagmas funcionais: cabeça, tórax e abdômen</strong>[cite: 1].</li>
+            <li>Presença de <strong>três pares de pernas articuladas</strong> inseridas ventralmente no tórax (condição hexápode)[cite: 1]. O protórax abriga o 1º par; o mesotórax abriga o 2º par de pernas e o 1º par de asas; o metatórax porta o 3º par de pernas e o 2º par de asas[cite: 1].</li>
+            <li>Presença de <strong>um par de antenas</strong> cefálicas com funções quimiotácteis[cite: 1].</li>
+            <li>Asas inseridas exclusivamente no pterotórax (mesotórax e metatórax)[cite: 1].</li>
+          </ul>
+
+          <h3>2.2 Morfologia e Adaptações dos Aparelhos Bucais</h3>
+          <ul>
+            <li><strong>Mastigador:</strong> Dotado de mandíbulas esclerotizadas cortantes e trituradoras[cite: 1]. Provoca desfolha visível, raspagem e broqueamento de tecidos lignificados (Orthoptera, Coleoptera, larvas de Lepidoptera)[cite: 1].</li>
+            <li><strong>Picador-sugador:</strong> Mandíbulas e maxilas modificadas em estiletes perfurantes envolvidos pelo lábio, formando canais de sucção de seiva e ejeção salivar[cite: 1]. Injetam toxinas e veiculam vírus sistêmicos e molicutes (Hemiptera e fêmeas de mosquitos Culicidae)[cite: 1].</li>
+            <li><strong>Lambedor:</strong> Modificação do lábio em labelo esponjoso para absorção por capilaridade de substâncias líquidas sem perfuração celular (Diptera)[cite: 1].</li>
+            <li><strong>Sugador sifonado (labial):</strong> Maxilas transformadas em uma tromba longa enrolada em espiral (probóscide) para sucção de néctar[cite: 1]. <em>Adultos de Lepidoptera apresentam esse aparelho e atuam como polinizadores; os prejuízos agrícolas decorrem exclusivamente da fase larval mastigadora</em>[cite: 1].</li>
+          </ul>
+
+          <h3>2.3 Ordens de Relevância Agropecuária</h3>
+          <p><strong>Orthoptera (gafanhotos, grilos, esperanças, paquinhas):</strong> Asas anteriores estreitas coriáceas (<strong>tégminas</strong>) e asas posteriores membranosas em leque[cite: 1]. Terceiro par de pernas adaptado para o salto (<strong>pernas saltadoras</strong>)[cite: 1]. Machos produzem som por <strong>estridulação</strong>[cite: 1]. A paquinha (Gryllotalpidae) apresenta pernas anteriores fossoriais adaptadas à escavação radicular[cite: 1].</p>
+          <p><strong>Isoptera (cupins / térmitas — Blattodea):</strong> Insetos eussociais polimórficos divididos em operários cegos estéreis, soldados providos de mandíbulas hipertrofiadas defensivas e casal reprodutor alado, destacando-se a rainha fisogástrica com capacidade de oviposição massiva contínua[cite: 1].</p>
+          <p><strong>Thysanoptera (tripes):</strong> Insetos diminutos providos de <strong>asas estreitas com franjas marginais de cerdas longas</strong> e aparelho bucal <strong>raspador-sugador</strong> assimétrico[cite: 1]. Danificam células epidérmicas (prateamento foliar) e atuam como vetores do tospovírus causador da virose do <strong>vira-cabeça</strong>[cite: 1].</p>
+          <p><strong>Hemiptera (percevejos, cigarrinhas, pulgões, cochonilhas):</strong> Aparelho bucal picador-sugador[cite: 1]. Subdivisão taxonômica[cite: 1]:</p>
+          <ul>
+            <li><strong>Heteroptera:</strong> Percevejos verdadeiros com asas anteriores do tipo <strong>hemiélitros</strong> (base coriácea e ápice membranoso)[cite: 1]. Destaque para percevejos fitófagos pentatomídeos que sugam vagens e grãos em formação[cite: 1].</li>
+            <li><strong>Auchenorrhyncha:</strong> Cigarras e cigarrinhas[cite: 1]. A cigarrinha <em>Dalbulus maidis</em> inocula molicutes vasculares, determinando o <strong>enfezamento pálido e vermelho do milho</strong>[cite: 1]. Machos de cigarras utilizam membranas timbais abdominais para emissão sonora[cite: 1].</li>
+            <li><strong>Sternorrhyncha:</strong> Pulgões (Aphididae), moscas-brancas (Aleyrodidae) e cochonilhas[cite: 1]. Sugam ativamente a seiva elaborada e eliminam o excesso na forma de <strong>honeydew</strong> (excreção líquida açucarada), propiciando a colonização de fungos saprófitas escuros conhecidos como <strong>fumagina</strong>, que recobrem o limbo foliar e bloqueiam a radiação fotossinteticamente ativa[cite: 1].</li>
+          </ul>
+          <p><strong>Lepidoptera (borboletas e mariposas):</strong> Corpo e asas revestidos por escamas microscópicas[cite: 1]. Holometábolos[cite: 1]. O dano agropecuário concentra-se estritamente na fase larval (lagartas polípodes mastigadoras), enquanto os adultos desempenham serviço de polinização floral[cite: 1].</p>
+          <p><strong>Coleoptera (besouros):</strong> Ordem com maior número de espécies descritas[cite: 1]. Asas anteriores hiper-esclerotizadas rígidas chamadas <strong>élitros</strong>, que protegem dorsalmente as asas membranosas de voo[cite: 1]. Reúne pragas rizófagas e desfolhadoras, bem como importantes predadores benéficos, como as <strong>joaninhas (Coccinellidae)</strong>, essenciais na supressão biológica de afídeos e cochonilhas[cite: 1].</p>
+          <p><strong>Diptera (moscas e mosquitos):</strong> Possuem <strong>apenas um par de asas funcionais anteriores</strong>, sendo o par metatorácico reduzido a estruturas claviformes de equilíbrio chamadas <strong>halteres ou balancins</strong>[cite: 1]. As <strong>moscas-das-frutas (Tephritidae)</strong> inserem ovos sob a epiderme dos frutos por meio do ovipositor; suas <strong>larvas ápodes</strong> broqueiam e decompõem a polpa[cite: 1].</p>
+          <p><strong>Hymenoptera (abelhas, vespas e formigas):</strong> Asas membranosas transparentes[cite: 1]. Abelhas possuem <strong>corbículas</strong> tibiais adaptadas à coleta de pólen[cite: 1]. Destaca-se a vespa parasitoide <strong><em>Cotesia flavipes</em></strong>, multiplicada e liberada massivamente em canaviais para controle biológico da broca <em>Diatraea saccharalis</em>[cite: 1].</p>
+          <p><strong>Ordens Predadoras Complementares:</strong> <strong>Dermaptera</strong> (tesourinhas, predadoras dotadas de cercos caudais em pinça)[cite: 1]; <strong>Neuroptera</strong> (crisopídeos ou bicho-lixeiro, cujas larvas com mandíbulas em foice predam pragas de corpo mole)[cite: 1]; e <strong>Odonata</strong> (libélulas carnívoras ágeis com larvas e adultos suprimindo mosquitos)[cite: 1].</p>
+        </article>
+
+        <!-- CAPÍTULO 3 INTEGRAL -->
+        <article class="full-chapter" id="text-cap3">
+          <h2>CAPÍTULO 3 - COLEÇÃO DE INSETOS</h2>
+
+          <h3>3.1 Finalidade e Legislação Vigente</h3>
+          <p>As coleções entomológicas prestam suporte à taxonomia, morfologia comparada e identificação de pragas quarentenárias[cite: 1]. No contexto brasileiro, pesquisas biológicas e coletas em Unidades de Conservação são controladas formalmente pelo SisBio/ICMBio[cite: 1]. Para atividades formativas escolares, orienta-se a amostragem ética restrita a espécies abundantes, vedando-se espécimes raros e exigindo-se autorização prévia em áreas rurais particulares[cite: 1].</p>
+
+          <h3>3.2 Métodos de Amostragem Ativa</h3>
+          <ul>
+            <li><strong>Redes Entomológicas:</strong> O puçá é confeccionado com aro metálico e saco de filó leve para apreensão em voo; o rapiché (rede de varredura) possui aro rígido e tecido resistente para arrasto mecânico em forrageiras e culturas herbáceas[cite: 1].</li>
+            <li><strong>Aspirador Entomológico:</strong> Cilindro com tubos de sucção oral provido internamente de <strong>tela protetora de malha micrométrica</strong>[cite: 1]. Permite coletar artrópodes diminutos (tripes, pulgões, microhimenópteros) preservando suas estruturas e evitando a ingestão pelo operador[cite: 1].</li>
+            <li><strong>Guarda-chuva Entomológico:</strong> Tecido branco tensionado em varetas cruzadas colocado sob o dossel de arbustos[cite: 1]. A agitação vigorosa dos galhos (método de batimento) faz os insetos caírem sobre o fundo claro, agilizando a triagem[cite: 1].</li>
+            <li><strong>Câmara Úmida:</strong> Recipiente hermético com fundo de areia umedecida e gotas de ácido fênico[cite: 1]. Utilizada para o <strong>relaxamento de espécimes ressecados</strong>, hidratando as articulações antes da alfinetagem para evitar o rompimento de antenas e patas[cite: 1].</li>
+          </ul>
+
+          <h3>3.3 Métodos de Amostragem Passiva (Armadilhas)</h3>
+          <ul>
+            <li><strong>Armadilha Luminosa:</strong> Fonte luminosa ultravioleta associada a anteparos de tecido ou funis coletores para captura noturna de mariposas, besouros e hemípteros fototrópicos positivos[cite: 1].</li>
+            <li><strong>Armadilha Malaise:</strong> Tenda de malha fina montada em trilhas que <strong>intercepta o voo natural dos insetos</strong>, induzindo-os a subir para um frasco superior de fixação com álcool[cite: 1]. Altamente eficaz para dípteros e vespas[cite: 1].</li>
+            <li><strong>Armadilha Pitfall (queda):</strong> Recipiente <strong>enterrado ao nível do solo</strong> contendo solução fixadora líquida com detergente para quebra da tensão superficial[cite: 1]. Captura artrópodes epígeos que caminham pelo solo (besouros carabídeos e formigas)[cite: 1].</li>
+            <li><strong>Armadilha McPhail:</strong> Redoma com abertura invaginada contendo <strong>atrativo alimentar proteico (proteína hidrolisada)</strong>, preconizada em pomares comerciais para o monitoramento populacional contínuo de <strong>moscas-das-frutas (Tephritidae)</strong>[cite: 1].</li>
+            <li><strong>Armadilhas Cromotrópicas Adesivas:</strong> Placas coloridas impregnadas com resina aderente[cite: 1]. Placas de coloração <strong>amarela</strong> capturam pulgões e moscas-brancas; placas de coloração <strong>azul</strong> possuem comprimento de onda atrativo específico para a amostragem de <strong>tripes (Thysanoptera)</strong>[cite: 1].</li>
+          </ul>
+
+          <h3>3.4 Montagem, Etiquetagem e Curadoria Técnica</h3>
+          <p><strong>Fixação Líquida:</strong> Espécimes de corpo membranoso, ninfas e larvas devem ser sacrificados e conservados permanentemente em <strong>álcool etílico a 70% ou 80%</strong>[cite: 1].</p>
+          <p><strong>Alfinetagem Direta:</strong> Restrita a <strong>exemplares adultos de médio e grande porte portadores de exoesqueleto rígido</strong>[cite: 1]. Utilizam-se alfinetes entomológicos de aço inoxidável (números 000 a 7) transpassados no lado direito do tórax para manter o inseto nivelado[cite: 1].</p>
+          <p><strong>Montagem em Lâminas:</strong> Insetos microscópicos (pulgões, tripes e piolhos) não suportam alfinetes; são clarificados quimicamente e <strong>montados entre lâmina e lamínula</strong> com meio de inclusão indelével (Bálsamo do Canadá ou meio de Hoyer)[cite: 1].</p>
+          <p><strong>Etiquetagem Padronizada:</strong> Etiquetas de papel vegetal (1 cm x 2 cm) fixadas no mesmo alfinete[cite: 1]. A primeira contém os dados de procedência geográfica: <strong>país, estado, município, data precisa de coleta e nome completo do coletor</strong>[cite: 1]. A segunda traz a identificação biológica taxonômica e o hospedeiro vegetal associado[cite: 1].</p>
+          <p><strong>Caixa Entomológica e Proteção:</strong> Caixas com tampa de vidro vedadas hermeticamente com fundo de Plastazote ou isopor[cite: 1]. A conservação exige a presença permanente de substâncias repelentes (cristais de <strong>naftalina</strong> ou paradiclorobenzeno) para impedir o ataque de pragas de acervo biológico, principalmente <strong>besouros de museu da família Dermestidae</strong>[cite: 1].</p>
+        </article>
+
+        <!-- CAPÍTULO 4 INTEGRAL -->
+        <article class="full-chapter" id="text-cap4">
+          <h2>CAPÍTULO 4 - REPRODUÇÃO E DESENVOLVIMENTO DOS INSETOS</h2>
+
+          <h3>4.1 Sincronização e Regulação Neuroendócrina</h3>
+          <p>O ciclo reprodutivo dos insetos é modulado pela integração de <strong>fatores abióticos externos</strong> (termoperíodo, fotoperíodo e umidade) com o <strong>sistema neuroendócrino interno</strong>[cite: 1]. A produção de hormônio juvenil pelos corpos alados e da ecdisona pelas glândulas protorácicas comanda o desenvolvimento gonadal e as transformações metamórficas.</p>
+
+          <h3>4.2 Comunicação Pré-Copulatória</h3>
+          <ul>
+            <li><strong>Sinais Visuais:</strong> Revoada nupcial e padrões de bioluminescência sincronizada emitida por enzimas luciferases no abdômen de vaga-lumes (Lampyridae)[cite: 1].</li>
+            <li><strong>Sinais Sonoros:</strong> Machos de cigarras utilizam membranas convexas abdominais denominadas <strong>timbais</strong>; machos de gafanhotos e grilos utilizam <strong>estridulação</strong> (fricção mecânica entre saliências das pernas posteriores e nervuras das tégminas, ou entre tégminas)[cite: 1].</li>
+            <li><strong>Sinais Olfativos e Feromônios Sexuais:</strong> Misturas químicas voláteis liberadas por fêmeas que orientam machos a grandes distâncias[cite: 1].</li>
+          </ul>
+
+          <h3>4.3 Corte, Alimentação Nupcial e Fecundação</h3>
+          <p>Os machos frequentemente ofertam presentes nupciais para assegurar a receptividade feminina[cite: 1]. Transferem o <strong>espermatóforo</strong> — pacote gelatinoso proteico contendo espermatozoides e metabólitos nutritivos que a fêmea absorve para <strong>suprir os custos da ovogênese e aumentar o vigor dos ovos</strong>[cite: 1].</p>
+          <p>Em louva-a-deus (Mantodea), ocorre o <strong>canibalismo sexual</strong>: a fêmea decapita e consome o corpo do macho durante ou após o acoplamento, utilizando a massa corpórea do consorte como fonte imediata de aminoácidos para o desenvolvimento embrionário[cite: 1].</p>
+          <p><strong>Espermateca:</strong> Estrutura saciforme revestida por cutícula do sistema genital feminino encarregada de <strong>armazenar, oxigenar e manter viáveis os espermatozoides</strong> por semanas, meses ou anos[cite: 1]. Isso possibilita fertilizações contínuas de sucessivas posturas de ovos após uma única cópula (via edeago masculino)[cite: 1].</p>
+
+          <h3>4.4 Modos Reprodutivos e Embriogênese</h3>
+          <ul>
+            <li><strong>Oviparidade:</strong> Postura de ovos externamente, isolados ou protegidos em <strong>ootecas</strong> endurecidas resistentes à dessecação (baratas e louva-a-deus)[cite: 1].</li>
+            <li><strong>Viviparidade:</strong> Formação do embrião no interior do corpo materno (ovoviviparidade, viviparidade pseudoplacentária, viviparidade hemocélica em Strepsiptera e viviparidade adenotrófica em moscas Glossinidae)[cite: 1].</li>
+            <li><strong>Partenogênese:</strong> Desenvolvimento biológico completo de progênie a partir de <strong>ovos não fecundados</strong> por gametas masculinos[cite: 1]. Característica de <strong>afídeos (pulgões)</strong>, permitindo multiplicações explosivas nas lavouras em condições térmicas ideais[cite: 1].</li>
+            <li><strong>Poliembrionia:</strong> Clivagem de um único zigoto originando dezenas a centenas de embriões geneticamente clones (comum em microvespas parasitoides)[cite: 1].</li>
+          </ul>
+
+          <h3>4.5 Padrões de Desenvolvimento Pós-Embrionário</h3>
+          <ul>
+            <li><strong>Ametábolo (direto):</strong> O indivíduo eclode com aspecto idêntico ao adulto, diferindo exclusivamente pelo porte menor e aparelho reprodutivo indiferenciado, sem transformações morfológicas estruturais (Archaeognatha)[cite: 1].</li>
+            <li><strong>Hemimetábolo (gradual / incompleto):</strong> Ciclo composto pelas fases de <strong>ovo, jovem (denominado ninfa em ambiente terrestre ou náiade em meio aquático) e adulto alado</strong>[cite: 1]. As ninfas compartilham semelhança corpórea com o adulto, porém não possuem asas funcionais nem gônadas maduras (Orthoptera, Hemiptera, Odonata)[cite: 1].</li>
+            <li><strong>Holometábolo (metamorfose completa):</strong> O ciclo divide-se em quatro fases distintas: <strong>ovo, larva mastigadora ativa, pupa quiescente de reorganização tecidual interna e adulto</strong>[cite: 1]. Constitui a principal inovação adaptativa dos insetos (Coleoptera, Lepidoptera, Diptera, Hymenoptera), pois <strong>segrega completamente os nichos ecológicos e alimentares entre formas jovens e adultas, eliminando a competição intraespecífica por alimento na mesma planta hospedeira</strong>[cite: 1].</li>
+          </ul>
+
+          <h3>4.6 Morfologia de Pupas, Larvas e Dinâmica da Ecdise</h3>
+          <p><strong>Pupas dos Holometábolos:</strong></p>
+          <ul>
+            <li><strong>Exaratas décticas:</strong> Apêndices locomotores e asas livres do corpo, providas de mandíbulas móveis funcionais (Megaloptera)[cite: 1].</li>
+            <li><strong>Exaratas adécticas:</strong> Apêndices livres, porém desprovidas de mandíbulas articuladas funcionais (Coleoptera e Hymenoptera)[cite: 1].</li>
+            <li><strong>Obtectas adécticas:</strong> Apêndices soldados intimamente à superfície corpórea por secreção cimentante rígida, formando uma estrutura fusiforme compacta (<strong>crisálidas de Lepidoptera</strong>)[cite: 1].</li>
+          </ul>
+          <p><strong>Classificação Larvária:</strong> Larvas <strong>polípodes</strong> (três pares de pernas torácicas verdadeiras associadas a pares de falsas pernas abdominais carnosas em Lepidoptera); <strong>oligópodes</strong> (apenas três pares torácicos, sem apêndices abdominais, em larvas de besouros e crisopídeos); e <strong>ápodes</strong> (cilíndricas vermiformes sem nenhuma perna motora, típicas de Diptera)[cite: 1].</p>
+          <p><strong>O Fenômeno da Ecdise (Muda):</strong> Devido à inextensibilidade da cutícula esclerotizada, o crescimento físico dá-se descontinuamente em duas fases sucessivas[cite: 1]:</p>
+          <ol>
+            <li><strong>Apólise:</strong> Fase inicial de desconexão bioquímica na qual a cutícula antiga se descola mecanicamente da epiderme subjacente, iniciando a síntese de uma nova camada pré-ecdicial[cite: 1].</li>
+            <li><strong>Ecdise:</strong> Ruptura dorsal da carapaça residual antiga ao longo da linha de ecdise e emergência do inseto[cite: 1]. A carapaça cuticular descartada no substrato é tecnicamente denominada <strong>exúvia</strong>[cite: 1].</li>
+          </ol>
+        </article>
+
+      </div>
+
+      <div class="modal-footer">
+        <span style="font-size: 0.85rem; color: var(--text-muted);">
+          Selecione as abas de capítulo para navegar. Ao concluir a leitura, retorne à prova.
+        </span>
+        <button class="btn btn-primary" style="width: auto;" onclick="closeApostilaModal()">Retornar ao Questionário</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ANULAÇÃO POR DESCONEXÃO / INFRAÇÃO -->
+  <div id="modal-fraud" class="modal-overlay">
+    <div class="modal-content" style="max-width: 520px; text-align: center; padding: 26px; height: auto;">
+      <div style="font-size: 3.2rem; color: var(--danger); margin-bottom: 12px;">🚫</div>
+      <h3 style="color: var(--danger); margin-bottom: 12px;">Tentativa Anulada por Desconexão!</h3>
+      <p style="color: #333; font-size: 0.95rem; line-height: 1.55; margin-bottom: 18px;">
+        O sistema identificou a minimização do navegador, alternância de aplicativo ou abertura de nova aba. Em concordância com os regulamentos pedagógicos da disciplina, saídas externas resultam no <strong>encerramento sumário com nota zero (0.0)</strong> desta tentativa.
+      </p>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px;">
+        A ocorrência foi formalmente registrada no relatório docente do professor Charles Lobo Pinheiro.
+      </p>
+      <button class="btn btn-danger" style="width: 100%;" onclick="dismissFraudAndReset()">
+        Compreendido. Reiniciar do Zero
+      </button>
+    </div>
+  </div>
+
+  <!-- Firebase (banco de dados em tempo real compartilhado entre todos os dispositivos) -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+  <script>
+    /* =========================================================================
+       BANCO DE DADOS: 80 QUESTÕES CONTEXTUALIZADAS (20 POR CAPÍTULO)
+       - Capítulo 1 focado estritamente em Definições e Conceitos (SEM MIP)
+       - Capítulos 2, 3 e 4 focados em Definições, Aplicação Prática e Compreensão
+       - Alternativas simétricas e gabarito balanceado (4 A, 4 B, 4 C, 4 D, 4 E por capítulo)
+       ========================================================================= */
+    const QUESTION_BANK = {
+      cap1: [
+        {
+          id: "c1_q1",
+          context: "A etimologia é uma ferramenta indispensável nas ciências biológicas para elucidar a essência estrutural de um grupo zoológico e a raiz conceitual de uma área científica.",
+          prompt: "Qual é a definição terminológica exata da palavra Entomologia e a respectiva raiz de seus vocábulos gregos?",
+          options: [
+            "Estudo dos insetos, derivando dos vocábulos gregos entomon (cortado em segmentos) e logos (estudo).",
+            "Estudo dos artrópodes, derivando dos vocábulos gregos arthron (articulado) e logos (tratado zoológico).",
+            "Estudo das pragas agrícolas, derivando dos vocábulos gregos entomon (daninho) e pathos (doença vegetal).",
+            "Estudo dos invertebrados, derivando dos vocábulos gregos invertebra (sem coluna) e logos (ciência pura).",
+            "Estudo dos animais hexápodes, derivando dos vocábulos gregos hexa (seis partes) e logos (conhecimento)."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c1_q2",
+          context: "Dentro da vasta amplitude da Entomologia Geral, os ramos de atuação subdividem-se de acordo com o objeto de estudo e suas relações ecológicas e aplicadas.",
+          prompt: "Como se define formalmente o ramo da Entomologia Forense no campo das investigações criminais periciais?",
+          options: [
+            "É o estudo dos danos mecânicos causados por cupins xilófagos em estruturas históricas urbanas de madeira.",
+            "É o estudo do ciclo biológico e sucessão ecológica de insetos necrófagos para estimativa do tempo de morte.",
+            "É o estudo sistemático de insetos hematófagos transmissores de agentes patogênicos infecciosos aos animais.",
+            "É o estudo da classificação taxonômica molecular voltada à determinação de espécies exóticas invasoras.",
+            "É o estudo focado na descrição anatômica de peças bucais para reconstituição de fósseis em estratos rochosos."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c1_q3",
+          context: "A caracterização hierárquica e a identificação precisa das espécies animais constituem a base indispensável para qualquer ramo da ciência biológica aplicada.",
+          prompt: "Qual é a definição exata do papel técnico desempenhado por um entomologista especializado em Taxonomia?",
+          options: [
+            "Dedica-se a calcular a dosagem de inseticidas químicos para controle fitossanitário de pragas da lavoura.",
+            "Dedica-se a avaliar o potencial nutricional de farinhas de insetos na formulação de rações zootécnicas.",
+            "Dedica-se à descrição morfológica, classificação hierárquica e identificação sistemática das espécies.",
+            "Dedica-se a monitorar o comportamento de dispersão noturna de enxames de gafanhotos migratórios a campo.",
+            "Dedica-se a criar colônias de abelhas nativas sem ferrão para comercialização de méis especiais florais."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c1_q4",
+          context: "Na história da engenharia sanitária e epidemiologia, a construção do Canal do Panamá representou um marco onde o desconhecimento dos ciclos biológicos de insetos vetores quase inviabilizou a obra, gerando a morte de mais de 27.000 trabalhadores até a intervenção das medidas de manejo ambiental de William Gorgas.",
+          prompt: "No contexto da Entomologia Médica aplicada, qual agente etiológico e qual vetor foram os principais responsáveis por essa crise sanitária histórica?",
+          options: [
+            "A bactéria Yersinia pestis, veiculada pela saliva inoculadora de pulgas da espécie Xenopsylla cheopis.",
+            "O vírus da febre amarela, disseminado exclusivamente pelo barbeiro da espécie Triatoma infestans.",
+            "O protozoário Trypanosoma cruzi, introduzido ativamente por moscas hematófagas Stomoxys calcitrans.",
+            "O protozoário Plasmodium, transmitido por fêmeas hematófagas de mosquitos do gênero Anopheles.",
+            "A espiroqueta Borrelia burgdorferi, transmitida por carrapatos pertencentes ao gênero Amblyomma."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c1_q5",
+          context: "Durante o século XIV na Europa, a Peste Negra provocou um colapso demográfico e socioeconômico sem precedentes, evidenciando como a interação patógeno-vetor-hospedeiro pode alterar os rumos da civilização humana quando não há controle sanitário adequado.",
+          prompt: "Sob a perspectiva técnica da Entomologia, qual organismo atuou diretamente como vetor biológico da bactéria Yersinia pestis para a espécie humana?",
+          options: [
+            "O percevejo de cama Cimex lectularius, abrigado em frestas de habitações rurais antigas na Europa medieval.",
+            "O piolho Pediculus humanus, proliferado devido à precariedade higiênica dos aglomerados urbanos da época.",
+            "A mosca Musca domestica, transportando biofilmes bacterianos mecânicos em feiras livres comunitárias.",
+            "O caruncho Sitophilus granarius, contaminando massivamente farinhas de cereais estocadas em tulhas de vilas.",
+            "A pulga do rato Xenopsylla cheopis, hospedada naturalmente em roedores urbanos da espécie Rattus rattus."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c1_q6",
+          context: "Um equívoco frequente em propriedades agrícolas consiste em classificar indistintamente qualquer inseto observado na cultura como uma praga a ser imediatamente combatida, desconsiderando a diversidade zoológica e os equilíbrios tróficos naturais.",
+          prompt: "Considerando a totalidade de espécies de insetos catalogadas pela ciência, qual proporção real corresponde a espécies prejudiciais às atividades humanas?",
+          options: [
+            "Menos de um por cento da biodiversidade de espécies de insetos descrita formalmente na literatura.",
+            "Aproximadamente cinquenta por cento do total de espécies de insetos catalogadas no cenário global.",
+            "Cerca de vinte e cinco por cento de todos os táxons descritos no filo Arthropoda em áreas agrícolas.",
+            "Quase setenta por cento das ordens de artrópodes que possuem interação ecológica com plantas verdes.",
+            "Exatamente quarenta por cento dos grupos taxonômicos presentes em agroecossistemas tropicais úmidos."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c1_q7",
+          context: "A fruticultura irrigada e as culturas graníferas demandam serviços ecossistêmicos essenciais para garantir taxas adequadas de frutificação comercial, produtividade por hectare e manutenção da variabilidade genética vegetal.",
+          prompt: "Qual proporção das principais culturas alimentares exploradas comercialmente no mundo depende da polinização entomófila?",
+          options: [
+            "Cerca de dez por cento das espécies cultivadas em sistemas agrícolas tecnificados em todo o mundo.",
+            "Aproximadamente setenta e cinco por cento das principais culturas alimentares exploradas no planeta.",
+            "Aproximadamente trinta por cento das variedades comerciais de interesse agronômico para a indústria.",
+            "Exatamente cinquenta por cento de toda a produção vegetal de grãos destinada à alimentação humana.",
+            "Praticamente cem por cento das espécies botânicas angiospérmicas presentes em pomares comerciais."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c1_q8",
+          context: "A entomologia econômica contempla a exploração zootécnica racional de produtos e subprodutos de origem entomológica com alto valor agregado nos setores têxtil, alimentício, farmacológico e cosmético.",
+          prompt: "Quais espécies de insetos fornecem a fibra têxtil da seda natural e o corante carmim, respectivamente?",
+          options: [
+            "A abelha Apis mellifera e a broca-da-cana Diatraea saccharalis criadas em biofábricas comerciais.",
+            "O besouro Tenebrio molitor e o percevejo-marrom Euschistus heros multiplicados sob dietas artificiais.",
+            "A lagarta Bombyx mori e a cochonilha Dactylopius coccus exploradas tradicionalmente pelo homem.",
+            "A lagarta Spodoptera frugiperda e o tripes Frankliniella schultzei mantidos em estufas laboratoriais.",
+            "O gorgulho Anthonomus grandis e a mosca-branca Bemisia tabaci coletados em lavouras de algodão."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c1_q9",
+          context: "Diante das demandas globais por fontes proteicas sustentáveis de baixa pegada de carbono e reduzido consumo hídrico, a FAO elaborou diretrizes técnicas para o fomento da entomofagia em escala global.",
+          prompt: "Com base nas estimativas oficiais da FAO (2013), quantas espécies de insetos são consumidas pela humanidade e quais ordens lideram esse consumo?",
+          options: [
+            "Cerca de 200 espécies catalogadas, predominando amplamente Diptera, Hemiptera, Isoptera e Odonata.",
+            "Aproximadamente 500 espécies catalogadas, destacando-se Dermaptera, Blattodea, Mantodea e Thysanoptera.",
+            "Menos de 100 espécies catalogadas, concentradas quase exclusivamente em Neuroptera e Phasmatodea.",
+            "Mais de 1.900 espécies catalogadas, destacando-se Coleoptera, Lepidoptera, Hymenoptera e Orthoptera.",
+            "Mais de 5.000 espécies catalogadas, restritas às ordens aquáticas Ephemeroptera e Trichoptera."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c1_q10",
+          context: "A etapa pós-colheita representa um ponto crítico da cadeia produtiva de grãos no Brasil e no mundo, onde o ataque de insetos pragas de armazenamento compromete a matéria seca, a capacidade germinativa e a sanidade dos lotes.",
+          prompt: "Em países em desenvolvimento, qual percentual médio da produção agrícola armazenada é perdido pós-colheita pelo ataque de insetos?",
+          options: [
+            "Índices residuais inferiores a dois por cento do montante total de grãos ensacados em armazéns.",
+            "Perdas moderadas situadas estritamente na faixa compreendida entre três e cinco por cento do silo.",
+            "Danos catastróficos que atingem entre quarenta e cinquenta por cento de todos os estoques rurais.",
+            "Prejuízos generalizados que inviabilizam mais de setenta por cento dos lotes guardados em tulhas.",
+            "Perdas pós-colheita situadas habitualmente na faixa expressiva entre dez e vinte por cento do total."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c1_q11",
+          context: "Dentre as pragas desfolhadoras históricas com capacidade de formar enxames de bilhões de indivíduos vorazes que dizimam pastagens e culturas em poucas horas, destaca-se um grupo ortopteróide com alta plasticidade fenotípica.",
+          prompt: "A qual família entomológica pertencem os gafanhotos migratórios responsáveis por surtos devastadores documentados na história?",
+          options: [
+            "Família Acrididae, caracterizada pelo consumo massivo, gregário e voraz da biomassa foliar verde.",
+            "Família Gryllidae, caracterizada por hábitos noturnos e corte contínuo de raízes sob o solo arado.",
+            "Família Tettigoniidae, composta por esperanças verdes fitófagas camufladas na folhagem do dossel.",
+            "Família Gryllotalpidae, dotada de pernas anteriores modificadas para a escavação radicular subterrânea.",
+            "Família Pentatomidae, cujas ninfas e adultos sugam seiva diretamente dos vasos condutores do caule."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c1_q12",
+          context: "O desenho ecológico de agroecossistemas diversificados contrapõe-se à vulnerabilidade intrínseca dos monocultivos extensivos perante as flutuações populacionais de artrópodes fitófagos especialistas.",
+          prompt: "Por qual razão ecológica o consórcio de culturas e a rotação vegetal reduzem significativamente a ocorrência epidêmica de pragas?",
+          options: [
+            "Porque reduzem a disponibilidade de oxigênio foliar através do sombreamento mecânico entre plantas.",
+            "Porque rompem a oferta contínua de hospedeiros e favorecem as populações de inimigos naturais.",
+            "Porque promovem a exaustão fisiológica rápida dos tecidos celulares vegetais em crescimento ativo.",
+            "Porque inviabilizam a atividade enzimática de organismos decompositores que habitam a serapilheira.",
+            "Porque alteram a composição mineral do solo eliminando as reservas nutritivas das plantas cultivadas."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c1_q13",
+          context: "A atividade biológica de artrópodes edáficos no perfil do solo exerce influência determinante na pedogênese e nas propriedades físico-hídricas de áreas agrícolas sustentáveis.",
+          prompt: "De acordo com o Capítulo 1, qual serviço ecossistêmico direto térmitas e formigas prestam à física do solo?",
+          options: [
+            "Promovem a esterilização microbiológica do horizonte superficial através da liberação de ácido fórmico.",
+            "Bloqueiam a infiltração hídrica superficial para manter as raízes das plantas livres de encharcamento.",
+            "Auxiliam na aeração, infiltração de água e movimentação de partículas na ciclagem de nutrientes.",
+            "Cimentam as partículas coloidais de argila impedindo processos erosivos laminares em terrenos íngremes.",
+            "Eliminam os fungos micorrízicos rizosféricos para evitar a competição nutricional com as raízes agrícolas."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c1_q14",
+          context: "O aproveitamento e manejo racional das abelhas na agropecuária abrangem duas modalidades tradicionais baseadas em diferenças biológicas e taxonômicas entre os grupos de polinizadores.",
+          prompt: "Como se definem os conceitos técnicos de Apicultura e Meliponicultura, respectivamente?",
+          options: [
+            "Criação de vespas predadoras para controle biológico e criação de abelhas solitárias em ninhos de barro.",
+            "Criação de mariposas sericígenas em amoras e criação de besouros necrófagos para decomposição orgânica.",
+            "Extração extrativista predatória de colmeias silvestres e domesticação de zangões para coleta de pólen.",
+            "Criação racional de abelhas com ferrão (gênero Apis) e criação racional de abelhas nativas sem ferrão.",
+            "Multiplicação em laboratório de abelhas parasitoides e criação de mamangavas para estufas comerciais."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c1_q15",
+          context: "No reino animal, a ciclagem biogeoquímica de nutrientes e o fluxo de energia dependem criticamente da quebra e digestão de restos orgânicos vegetais e carcaças animais.",
+          prompt: "Qual é a definição biológica de insetos necrófagos e detritívoros no equilíbrio dos agroecossistemas?",
+          options: [
+            "São organismos que perfuram frutos intactos em maturação para acelerar a queda fisiológica das sementes.",
+            "São insetos que realizam mutualismo trófico com formigas para proteção recíproca contra aves insetívoras.",
+            "São pragas desfolhadoras primárias que consomem a folhagem verde de árvores adultas em florestas nativas.",
+            "São parasitas estritos que depositam ovos exclusivamente dentro do sistema respiratório de mamíferos.",
+            "São insetos que se alimentam de carcaças e matéria vegetal em decomposição, reciclando nutrientes."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c1_q16",
+          context: "Alguns grupos taxonômicos de insetos destacam-se mundialmente por apresentarem coloração exuberante, padrões alares complexos e fenômenos migratórios que impulsionam o turismo ecológico e a valorização ambiental.",
+          prompt: "Qual lepidóptero é citado no texto didático como símbolo de conservação ambiental devido ao seu valor estético e rotas migratórias?",
+          options: [
+            "A borboleta-monarca (Danaus plexippus), célebre por seus movimentos migratórios no continente americano.",
+            "A lagarta-do-cartucho (Spodoptera frugiperda), reconhecida pelo padrão estético de sua fase adulta noturna.",
+            "A broca-da-cana (Diatraea saccharalis), utilizada no ecoturismo associado a lavouras agroindustriais.",
+            "A mariposa-da-maçã (Cydia pomonella), admirada pela coloração críptica de suas asas em repouso no lenho.",
+            "O bicho-da-seda (Bombyx mori), apreciado exclusivamente pelo voo nupcial vigoroso em matas orientais."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c1_q17",
+          context: "A entomologia médica investiga o papel patogênico de artrópodes vetores que veiculam vírus, protozoários e bactérias aos seres humanos e rebanhos zootécnicos.",
+          prompt: "Qual a diferença conceitual e biológica entre um vetor hematófago de patógenos e uma praga fitófaga da lavoura?",
+          options: [
+            "O vetor hematófago alimenta-se de néctar floral puro, enquanto a praga fitófaga ataca apenas tecidos lenhosos.",
+            "O vetor hematófago alimenta-se de sangue animal inoculando parasitas; a praga fitófaga consome tecidos vegetais.",
+            "O vetor hematófago apresenta aparelho bucal mastigador, enquanto a praga fitófaga é desprovida de mandíbulas.",
+            "O vetor hematófago atua exclusivamente na reciclagem do solo, enquanto a praga fitófaga ataca apenas carcaças.",
+            "O vetor hematófago realiza polinização cruzada, enquanto a praga fitófaga induz mutações genéticas no hospedeiro."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c1_q18",
+          context: "O conhecimento entomológico consolidado estabelece que a imensa riqueza biológica dos insetos decorre de um conjunto refinado de adaptações morfológicas e fisiológicas evolutivas.",
+          prompt: "Quais fatores evolutivos explicam o extraordinário sucesso e diversidade dos insetos segundo a literatura entomológica?",
+          options: [
+            "A ausência de esqueleto externo, grande massa corporal e necessidade de grandes territórios de caça.",
+            "O sistema circulatório fechado com hemoglobina e aparelho bucal mastigador único e invariável em todas ordens.",
+            "O exoesqueleto protetor, o pequeno porte corporal, a capacidade de voo e a elevada taxa reprodutiva.",
+            "A dependência estrita de ambientes marinhos bentônicos e ausência completa de fases jovens imaturas.",
+            "O desenvolvimento exclusivamente ametábolo associado à reprodução por brotamento colonial assexuado."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c1_q19",
+          context: "Na formação do Técnico em Agropecuária, a compreensão do papel dos insetos exige superar visões reducionistas e compreender a entomofauna em sua dinâmica ecológica funcional.",
+          prompt: "Como se define tecnicamente o papel de um inseto que atua como inimigo natural no agroecossistema?",
+          options: [
+            "É um inseto fitófago secundário que acelera a maturação precoce de grãos verdes na espiga da cultura.",
+            "É um organismo vegetal simbiótico que excreta compostos tóxicos na rizosfera contra nematódeos de solo.",
+            "É um microrganismo fúngico mutualista que coloniza o intestino de cupins para digestão da celulose.",
+            "É um organismo predador ou parasitoide que regula naturalmente a densidade de populações de pragas.",
+            "É um inseto polinizador obrigatório que impede o desenvolvimento embrionário de sementes invasoras."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c1_q20",
+          context: "A entomologia florestal aplica-se à proteção de ecossistemas florestais nativos e maciços homogêneos comerciais contra o ataque de artrópodes desfolhadores e broqueadores.",
+          prompt: "Qual é o objeto central de investigação científica da Entomologia Florestal?",
+          options: [
+            "O cultivo racional de abelhas nativas em troncos ocos de espécies madeireiras ameaçadas de extinção.",
+            "A aplicação de agrotóxicos em pomares de espécies cítricas para erradicação de pulgões alados no campo.",
+            "A análise da toxicidade de venenos de vespas sociais sobre rebanhos bovinos em pastagens arborizadas.",
+            "O estudo da decomposição cadavérica em crimes ambientais praticados no interior de florestas públicas.",
+            "O estudo dos insetos associados a essências florestais, sejam como pragas ou como agentes benéficos."
+          ],
+          correct: 4 // E
+        }
+      ],
+
+      cap2: [
+        {
+          id: "c2_q1",
+          context: "No estudo morfológico comparado dentro do filo Arthropoda, a Classe Insecta (Hexapoda) destaca-se por um plano de organização anatômica e tagmose altamente especializado para a exploração de ambientes terrestres.",
+          prompt: "Quais caracteres anatômicos diagnósticos definem universalmente um artrópode pertencente à Classe Insecta?",
+          options: [
+            "Corpo dividido em cabeça, tórax e abdômen, três pares de pernas torácicas e um par de antenas.",
+            "Corpo dividido em cefalotórax e abdômen, quatro pares de pernas locomotoras e quelíceras rígidas.",
+            "Corpo articulado em prossoma e opistossoma, cinco pares de pernas natatórias e telson terminal.",
+            "Corpo segmentado em cabeça e tronco homogêneo, um par de apêndices motores por anel corpóreo.",
+            "Corpo recoberto por carapaça calcificada rígida, três pares de apêndices cefálicos e brânquias."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c2_q2",
+          context: "A locomoção terrestre e aérea dos insetos reflete uma biomecânica precisa associada à esclerotização e arranjo dos apêndices locomotores nos três segmentos torácicos (protórax, mesotórax e metatórax).",
+          prompt: "Como estão distribuídos anatomicamente os três pares de pernas e os pares de asas nos segmentos do tórax?",
+          options: [
+            "Dois pares de pernas inserem-se no protórax e as asas articulam-se livremente no abdômen anterior.",
+            "Um par de pernas em cada segmento torácico, com asas inseridas no mesotórax e metatórax.",
+            "Todos os pares de pernas inserem-se no metatórax e os dois pares de asas no protórax esclerotizado.",
+            "Dois pares de pernas fixam-se no mesotórax e um par no abdômen posterior sem ligação alar dorsal.",
+            "Um par de pernas articula-se na cabeça e os dois pares de asas projetam-se do protórax dorsal."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c2_q3",
+          context: "Lavouras de milho no semiárido e Centro-Oeste sofrem perdas severas com o complexo de enfezamento, cujos sintomas envolvem porte reduzido, clorose e proliferação de espigas inviáveis veiculados pela cigarrinha Dalbulus maidis.",
+          prompt: "Qual tipo de aparelho bucal essa cigarrinha possui e por meio de qual mecanismo ela inocula os molicutes?",
+          options: [
+            "Aparelho mastigador com mandíbulas esclerotizadas que dilaceram parênquima foliar abrindo feridas.",
+            "Aparelho lambedor dotado de labelo carnoso que absorve soluções extravasadas na epiderme celular.",
+            "Aparelho picador-sugador com estiletes que atingem o floema e inoculam saliva contaminada na seiva.",
+            "Aparelho sugador labial com probóscide móvel que absorve conteúdo celular foliar por capilaridade.",
+            "Aparelho raspador-sugador com mandíbula assimétrica que rompe tecidos condutores xilemáticos secos."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c2_q4",
+          context: "Na amostragem fitossanitária da cultura da soja, percevejos da família Pentatomidae perfuram as vagens e atacam os grãos em desenvolvimento, provocando chochamento e retenção foliar.",
+          prompt: "Qual tipo morfológico de asa anterior caracteriza os percevejos da subordem Heteroptera (ordem Hemiptera)?",
+          options: [
+            "Élitros totalmente esclerotizados e endurecidos que cobrem todo o abdômen dorsalmente em repouso.",
+            "Tégminas coriáceas homogêneas e flexíveis que se dobram longitudinalmente sobre o abdômen plano.",
+            "Balancins claviformes reduzidos a hastes vibratórias de orientação espacial durante o voo nupcial.",
+            "Hemiélitros com a metade basal coriácea esclerotizada e a metade apical fina e membranosa.",
+            "Asas franjadas de limbo reduzido guarnecidas lateralmente por cerdas plumosas longas de fixação."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c2_q5",
+          context: "Em pomares de fruteiras tropicais atacados por pulgões e moscas-brancas, observa-se a formação de uma camada fúngica escura sobre as folhas que impede a penetração de luz e a fotossíntese.",
+          prompt: "Qual processo entomológico desencadeia a colonização e expansão da referida cobertura fúngica (fumagina)?",
+          options: [
+            "Liberação de secreções digestivas ácidas decorrentes da mastigação de larvas minadoras de folhas.",
+            "Eliminação de resíduos cuticulares nitrogenados desprendidos durante a ecdise das ninfas no ramo.",
+            "Exsudações xilemáticas forçadas decorrentes da mastigação de besouros broqueadores do caule lenhoso.",
+            "Inoculação de enzimas proteolíticas no mesófilo foliar durante a oviposição de vespas no pecíolo.",
+            "Desenvolvimento de fungos saprófitas sobre o honeydew açucarado excretado por hemípteros."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c2_q6",
+          context: "Na ordem Lepidoptera, a ocorrência de metamorfose completa reflete uma notável dissociação entre as fases ontogenéticas em relação ao aparelho bucal e à alimentação.",
+          prompt: "Por qual razão os danos econômicos diretos causados por lepidópteros concentram-se quase exclusivamente no estágio de lagarta?",
+          options: [
+            "As larvas possuem aparelho mastigador desfolhador, enquanto adultos sugam néctar por probóscide.",
+            "As larvas apresentam aparelho picador-sugador de floema, enquanto os adultos perdem as mandíbulas.",
+            "As larvas raspam a epiderme com estiletes rígidos, enquanto os adultos tornam-se hematófagos.",
+            "As larvas broqueiam tecidos com aparelho lambedor, enquanto adultos mastigam órgãos florais vivos.",
+            "As larvas injetam toxinas estomacais no caule, enquanto os adultos consomem pólen desidratado seco."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c2_q7",
+          context: "A ordem Coleoptera apresenta grande diversidade trófica, englobando desde espécies fitófagas severas até táxons carnívoros utilizados com sucesso no controle biológico aplicado.",
+          prompt: "Como se denominam as asas anteriores dos coleópteros e qual papel agronômico as joaninhas (Coccinellidae) desempenham?",
+          options: [
+            "Tégminas flexíveis; atuam como pragas desfolhadoras primárias em olerícolas cultivadas no campo.",
+            "Élitros esclerotizados; atuam como predadoras benéficas de pulgões, cochonilhas e ácaros na planta.",
+            "Hemiélitros parcialmente membranosos; funcionam como vetoras do vírus da mancha anelar do mamão.",
+            "Balancins reduzidos; atuam como parasitas obrigatórios de lagartas desfolhadoras na cultura da soja.",
+            "Asas escamosas; comportam-se como insetos estritamente xilófagos em maciços florestais de eucalipto."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c2_q8",
+          context: "Na cultura da goiabeira e da mangueira, dípteros da família Tephritidae inviabilizam lotes de exportação ao depositarem ovos na polpa de frutos em maturação.",
+          prompt: "Quais são as características alares dos insetos adultos da ordem Diptera e em qual estágio ocorre o dano direto aos frutos?",
+          options: [
+            "Possuem quatro asas membranosas de igual textura; o dano à polpa é causado pela fêmea adulta alada.",
+            "Possuem asas anteriores coriáceas curtas; o dano aos frutos é provocado durante o estágio pupal inerte.",
+            "Possuem um par de asas funcionais e halteres; o dano direto é executado pela larva ápode interna.",
+            "Possuem élitros rígidos protetores; o dano ocorre pela perfuração alimentar executada pela ninfa jovem.",
+            "Possuem asas franjadas com cerdas; o dano mecânico é realizado pelo casulo em desenvolvimento no solo."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c2_q9",
+          context: "Em canaviais no Brasil, o controle da broca-do-colmo Diatraea saccharalis com inseticidas químicos é ineficiente devido à proteção física do colmo, exigindo o emprego de controle biológico clássico.",
+          prompt: "A qual ordem de insetos pertence a vespa parasitoide Cotesia flavipes e como atua no controle da referida praga?",
+          options: [
+            "Diptera, predando ativamente massas de ovos depositadas sobre a palhada residual da cultura de cana.",
+            "Coleoptera, colonizando as galerias do colmo e consumindo o lenho em competição alimentar direta.",
+            "Lepidoptera, atacando as crisálidas na base da planta por meio de mandíbulas trituradoras afiadas.",
+            "Hymenoptera, atuando como endoparasitoide cujas larvas se desenvolvem dentro da lagarta da broca.",
+            "Neuroptera, inoculando toxinas venenosas nas mariposas adultas pousadas nas folhas secas basais."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c2_q10",
+          context: "Em agroecossistemas com controle biológico conservativo, observam-se predadores generalistas com adaptações anatômicas especializadas para contenção de populações de insetos daninhos.",
+          prompt: "A quais ordens pertencem as tesourinhas com cercos em pinça, os crisopídeos de asas reticuladas e as libélulas?",
+          options: [
+            "Pertencem respectivamente a Orthoptera, Hemiptera e Diptera, com hábitos estritamente desfolhadores.",
+            "Pertencem respectivamente a Blattodea, Mantodea e Phasmatodea, atuando como pragas urbanas e de grãos.",
+            "Pertencem respectivamente a Coleoptera, Hymenoptera e Lepidoptera, atuando como broqueadores do caule.",
+            "Pertencem respectivamente a Thysanoptera, Isoptera e Ephemeroptera, atuando como fitófagos raspadores.",
+            "Pertencem respectivamente a Dermaptera, Neuroptera e Odonata, atuando como predadores benéficos."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c2_q11",
+          context: "Na ordem Orthoptera, a locomoção saltatória é complementada por estruturas cuticulares especializadas na produção de sinais acústicos específicos entre os indivíduos coespecíficos.",
+          prompt: "Qual estrutura alar protege as asas posteriores membranosas dos gafanhotos e como se define a emissão mecânica de sons pelos machos?",
+          options: [
+            "Tégminas coriáceas protetoras e o processo mecânico sonoro denomina-se tecnicamente estridulação.",
+            "Élitros esclerotizados espessos e a emissão sonora acústica decorre da contração de timbais torácicos.",
+            "Hemiélitros com base endurecida e a manifestação acústica ocorre pela expansão forçada de sacos aéreos.",
+            "Asas franjadas de voo e a comunicação sonora dá-se pelo choque de mandíbulas durante a alimentação.",
+            "Halteres pedunculados e o zumbido mecânico resulta exclusivamente da frequência do batimento alar."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c2_q12",
+          context: "Dentre os insetos da ordem Orthoptera prejudiciais em viveiros de mudas e canteiros de olerícolas, destaca-se a paquinha (família Gryllotalpidae), cujo hábito de vida exige apêndices específicos.",
+          prompt: "Qual modificação morfológica nas pernas anteriores caracteriza a paquinha e qual dano direto ela provoca às plantas jovens?",
+          options: [
+            "Pernas anteriores do tipo raptatórias com espinhos, causando a captura predatória de abelhas no canteiro.",
+            "Pernas anteriores do tipo fossoriais escavadoras, cortando raízes e o colo de plântulas recém-emergidas.",
+            "Pernas anteriores do tipo saltatórias hipertrofiadas, desfolhando a copa das mudas em viveiros altos.",
+            "Pernas anteriores do tipo natatórias achatadas, perfurando vasos condutores de canais de irrigação.",
+            "Pernas anteriores adesivas com ventosas, sugando a seiva bruta do córtex de mudas cítricas enxertadas."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c2_q13",
+          context: "Os térmitas (cupins), pertencentes à ordem Blattodea (antiga ordem Isoptera), destacam-se pela vida social organizada com polimorfismo acentuado entre os indivíduos da colônia.",
+          prompt: "Qual característica morfológica e reprodutiva singular define a rainha de cupins em um cupinzeiro maduro?",
+          options: [
+            "Presença de asas membranosas funcionais contínuas durante toda a sua existência reprodutiva no solo.",
+            "Mandíbulas hipertrofiadas em foice utilizadas prioritariamente para a defesa militar da colônia externa.",
+            "Abdômen com acentuada dilatação (fisogastria) capaz de realizar a postura de milhares de ovos diários.",
+            "Transformação de suas pernas posteriores em apêndices fossoriais para a escavação de túneis de forrageio.",
+            "Atrofia total do aparelho digestivo, alimentando-se exclusivamente de madeira não degradada por fungos."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c2_q14",
+          context: "A ordem Thysanoptera compreende insetos diminutos com caracteres anatômicos diagnósticos na venação alar e na anatomia das peças bucais.",
+          prompt: "Quais caracteres definem morfologicamente os tripes e qual virose eles transmitem às solanáceas?",
+          options: [
+            "Asas anteriores do tipo hemiélitros e atuam na transmissão do mosaico dourado na cultura do tomateiro.",
+            "Dois pares de asas membranosas com escamas coloridas e transmitem o vírus do enrolamento das folhas.",
+            "Élitros rígidos cobrindo o tórax e atuam como vetores do mosaico comum transmitido por contato no solo.",
+            "Asas estreitas franjadas de cerdas longas e aparelho bucal raspador-sugador que transmite tospovírus.",
+            "Ausência completa de asas em todas as fases e aparelho mastigador que inocula o vírus do mosaico anelar."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c2_q15",
+          context: "A anatomia externa da cabeça dos insetos reúne os principais órgãos dos sentidos e o complexo bucal articulado, adaptados ao nicho alimentar de cada espécie.",
+          prompt: "Quais estruturas sensoriais e alimentares compõem a morfologia cefálica diagnóstica dos insetos?",
+          options: [
+            "Dois pares de antenas birremes, um par de quelíceras pontiagudas e pedipalpos preênseis articulados.",
+            "Cerdas respiratórias branquiais, olhos pedunculados simples e garras mastigadoras desprovidas de palpos.",
+            "Espiráculos traqueais laterais, espinhos defensivos occipitais e probóscide locomotora esclerotizada.",
+            "Tentáculos carnosos retráteis, antenas natatórias com cerdas e ventosas mandibulares de sucção pura.",
+            "Olhos compostos, ocelos, um par de antenas unirremes e aparelho bucal modificado conforme a dieta."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c2_q16",
+          context: "Na ordem Hymenoptera, as abelhas fêmeas operárias apresentam adaptações corporais morfológicas notáveis para a coleta e transporte de pólen das flores.",
+          prompt: "Como se denomina a concavidade ladeada por cerdas rígidas presente nas tíbias posteriores das abelhas operárias?",
+          options: [
+            "Corbícula, estrutura especializada para acondicionar e transportar o pólen coletado na floração.",
+            "Espermateca tibial, empregada para oxigenar o néctar doce durante o voo de retorno à colmeia matriz.",
+            "Edeago externo, apêndice membranoso retrátil destinado a fixar grãos de pólen nas anteras florais.",
+            "Labelo esponjoso, modificação anatômica destinada a absorver compostos lipídicos sobre pétalas.",
+            "Cerco coletor, expansão quitinosa posterior responsável por limpar a cabeça e olhos durante o voo."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c2_q17",
+          context: "Besouros predadores e crisopídeos destacam-se na entomofagocitose natural por atacarem ativamente presas fitófagas nas lavouras.",
+          prompt: "Qual característica alimentar e alar diagnóstica distingue os crisopídeos (ordem Neuroptera)?",
+          options: [
+            "Asas anteriores rígidas em élitros e larvas com hábitos carnívoros aquáticos restritos a lagoas.",
+            "Quatro asas membranosas com nervação reticulada e larvas vorazes predadoras de pragas de corpo mole.",
+            "Asas recobertas de pelos plumosos e adultos sugadores que desfolham brotações apicais na lavoura.",
+            "Apenas um par de asas de voo e larvas ápodes parasitas obrigatórias de ninfas de gafanhotos verdes.",
+            "Asas anteriores coriáceas em tégminas e adultos com mandíbulas raptatórias carnívoras noturnas."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c2_q18",
+          context: "Em pomares de citros, o psilídeo Diaphorina citri é considerado uma praga quarentenária de alta prioridade fitossanitária mundial.",
+          prompt: "A qual subordem de Hemiptera pertence o psilídeo e qual enfermidade bacteriana vascular ele dissemina?",
+          options: [
+            "Subordem Heteroptera, sendo o transmissor da mancha preta provocada por fungos ascomicetos de frutos.",
+            "Subordem Auchenorrhyncha, sendo o vetor da podridão floral dos citros ocasionada por colletotrichum.",
+            "Subordem Sternorrhyncha, sendo o vetor da bactéria Candidatus Liberibacter associada ao Greening/HLB.",
+            "Subordem Coleorrhyncha, sendo o inoculador direto da gomose de phytophthora no colo do porta-enxerto.",
+            "Subordem Homoptera estrita, atuando exclusivamente na injeção de fitotoxinas estomacais no xilema do ramo."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c2_q19",
+          context: "O louva-a-deus (ordem Mantodea) é um predador reconhecido por sua eficiência na captura rápida de presas com membros torácicos modificados.",
+          prompt: "Quais são as adaptações anatômicas diagnósticas dos louva-a-deus para a atividade de caça no dossel?",
+          options: [
+            "Pernas posteriores natatórias achatadas e mandíbulas atrofiadas que absorvem fluidos por capilaridade.",
+            "Pernas medianas fossoriais escavadoras e antenas plumosas com receptores térmicos infravermelhos.",
+            "Cabeça imóvel fundida ao protórax e pernas dianteiras simples com tarsos desprovidos de garras afiadas.",
+            "Pernas anteriores raptatórias providas de espinhos e cabeça triangular extremamente móvel com olhos amplos.",
+            "Aparelho bucal do tipo lambedor labelar associado a cercos abdominais transformados em aguilhões venenosos."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c2_q20",
+          context: "Na ordem Phasmatodea (bichos-pau), os insetos apresentam camuflagem e comportamentos especializados para passarem despercebidos por aves insetívoras.",
+          prompt: "Como se define o comportamento de 'tanatose' exibido pelos bichos-pau quando perturbados mecanicamente no galho?",
+          options: [
+            "Emissão imediata de jatos de hemolinfa cáustica sob pressão através de seus espiráculos torácicos abertos.",
+            "Autoamputação reflexa das pernas anteriores para desviar a atenção visual do predador durante a fuga aérea.",
+            "Movimentação frenética em espiral pelo tronco com emissão simultânea de estridulação de advertência.",
+            "Acasalamento compulsório imediato com qualquer indivíduo coespecífico presente na folhagem vizinha.",
+            "Comportamento de fingir-se de morto, permanecendo imóvel e rígido simulando a inércia de um graveto seco."
+          ],
+          correct: 4 // E
+        }
+      ],
+
+      cap3: [
+        {
+          id: "c3_q1",
+          context: "A confecção de coleções biológicas no Brasil obedece a preceitos éticos e resoluções ambientais que visam resguardar a integridade da biodiversidade nacional contra impactos desnecessários.",
+          prompt: "Segundo os princípios éticos e a legislação descritos no Capítulo 3, qual conduta deve balizar a coleta entomológica didática?",
+          options: [
+            "Priorizar espécies comuns e abundantes, coletar o mínimo de indivíduos e obter anuência em áreas privadas.",
+            "Capturar espécimes raros ou ameaçados de extinção para assegurar seu registro em acervos escolares secos.",
+            "Realizar coletas livres sem solicitação de licença ambiental em quaisquer Parques e Reservas Biológicas.",
+            "Omitir sistematicamente as coordenadas geográficas de coleta visando impedir a localização do espécime.",
+            "Coletar preferencialmente fêmeas fecundadas em postura massiva para incubações fechadas no laboratório."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c3_q2",
+          context: "O sacrifício e a conservação de material entomológico coletado no campo exigem a seleção de substâncias químicas que preservem os caracteres taxonômicos sem provocar colapso tecidual.",
+          prompt: "Qual substância líquida e concentração volumétrica são preconizadas para a conservação permanente de espécimes de corpo mole?",
+          options: [
+            "Formol líquido anidro sem diluição com água destilada, mantido a noventa e cinco por cento de pureza.",
+            "Álcool etílico (etanol) em concentração volumétrica ajustada entre setenta e oitenta por cento.",
+            "Álcool isopropílico absoluto com adições de éter sulfúrico concentrado a trinta e cinco por cento no escuro.",
+            "Solução aquosa de hipoclorito de sódio clarificado tamponado a cinquenta por cento em frasco vedado.",
+            "Glicerina biológica enriquecida com hidróxido de potássio concentrado a quinze por cento no frio."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c3_q3",
+          context: "Na amostragem direta de tripes e afídeos presentes em folhas e flores de olerícolas, o emprego de pinças convencionais frequentemente esmaga o corpo dos insetos, impedindo a diagnose morfológica.",
+          prompt: "Qual instrumento manual é adequado para a captura desses organismos diminutos sem danificá-los e como protege o operador?",
+          options: [
+            "Pinça de relojoeiro serrilhada, dotada de lâminas de alta pressão para preensão abdominal direta no cálice.",
+            "Rede entomológica de filó grosso, arrastada vigorosamente sobre os botões florais da cultura em floração.",
+            "Aspirador entomológico dotado de tubo cilíndrico e tela de malha fina que impede a aspiração do inseto.",
+            "Frasco letal com fundo de gesso embebido em solvente orgânico, posicionado sob as plântulas novas no solo.",
+            "Guarda-chuva entomológico escuro, operado no solo com sacudimento de raízes arrancadas da terra úmida."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c3_q4",
+          context: "No monitoramento de artrópodes associados à copa de plantas arbustivas e espécies florestais, faz-se necessária uma técnica que viabilize a queda de insetos sem danificar a folhagem.",
+          prompt: "Qual equipamento manual utiliza uma lona clara invertida para recolher insetos desprendidos pelo batimento mecânico de galhos?",
+          options: [
+            "Armadilha Malaise com compartimento coletor suspenso e fixador líquido concentrado no topo da tenda.",
+            "Armadilha Pitfall escavada no solo com tampa protetora contra infiltração de água pluvial e folhas secas.",
+            "Rede de rapiché reforçada com aro de ferro para varredura contínua de gramíneas forrageiras em pasto.",
+            "Guarda-chuva entomológico forrado de tecido claro, posicionado sob a copa durante a agitação mecânica.",
+            "Câmara mortífera portátil fechada hermeticamente, abastecida com cristais de cianeto de potássio seco."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c3_q5",
+          context: "Em inventários ecológicos rápidos de entomofauna, combinam-se armadilhas de interceptação de voo com recipientes no nível do solo para amostragem contínua de diferentes nichos tróficos.",
+          prompt: "Como se denominam as armadilhas passivas destinadas à captura de insetos voadores em tenda e artrópodes de solo, respectivamente?",
+          options: [
+            "Armadilha Moericke colorida e armadilha McPhail com atrativos alimentares hidrolisados de frutas.",
+            "Armadilha luminosa com fonte ultravioleta e armadilha adesiva cromotrópica amarela em estufa.",
+            "Triângulo de papel vegetal dobrado e frasco com algodão embebido em acetato de etila puro no campo.",
+            "Rede entomológica do tipo puçá cônico e câmara úmida com fundo de areia esterilizada umedecida em sala.",
+            "Armadilha Malaise em forma de tenda de malha e armadilha Pitfall enterrada ao nível da superfície."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c3_q6",
+          context: "O comportamento visual dos insetos perante faixas específicas do espectro luminoso é explorado em casas de vegetação para monitoramento fitossanitário sem resíduos químicos.",
+          prompt: "Quais cores de armadilhas cromotrópicas adesivas são indicadas para atração de mosca-branca/pulgões e de tripes, respectivamente?",
+          options: [
+            "Armadilhas adesivas de cor amarela para mosca-branca/pulgões e de coloração azul para tripes.",
+            "Armadilhas adesivas de cor vermelha para mosca-branca/pulgões e de coloração preta para tripes.",
+            "Armadilhas adesivas de cor branca para mosca-branca/pulgões e de coloração verde para tripes.",
+            "Armadilhas adesivas de cor cinza para mosca-branca/pulgões e de coloração laranja para tripes.",
+            "Armadilhas adesivas de cor violeta para mosca-branca/pulgões e de coloração castanha para tripes."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c3_q7",
+          context: "Insetos de porte reduzido e exoesqueleto pouco esclerotizado, como tripes e formas ápteras de afídeos, rompem-se caso transpassados por alfinetes convencionais.",
+          prompt: "Qual procedimento técnico padronizado deve ser adotado para a preservação e estudo microscópico desses exemplares?",
+          options: [
+            "Fixação em alfinetes entomológicos de grosso calibre número cinco transpassados no escudo dorsal rígido.",
+            "Montagem entre lâmina e lamínula com meios transparentes permanentes como Bálsamo do Canadá ou Hoyer.",
+            "Adesão com fita colante dupla face diretamente sobre as placas de isopor da caixa de exibição escolar.",
+            "Secagem rápida em estufa a noventa graus Celsius seguida de armazenamento solto em envelopes de papelão.",
+            "Prensagem em prensas de madeira idênticas às empregadas na preparação de exsicatas botânicas em herbário."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c3_q8",
+          context: "Ao manusear espécimes de besouros e percevejos coletados há semanas e ressecados sem alfinetagem, o técnico nota rigidez muscular que impede distender os apêndices sem fratura.",
+          prompt: "Qual técnica laboratorial devolve a maleabilidade e flexibilidade às articulações desses espécimes ressecados?",
+          options: [
+            "Exposição a jatos de ar seco superaquecido com soprador térmico laboratorial direto sobre o tórax.",
+            "Imersão prolongada em solvente orgânico de éter etílico anidro sob agitação mecânica intermitente.",
+            "Acondicionamento temporário dos espécimes em câmara úmida sobre substrato de areia umedecida.",
+            "Aplicação tópica de ácido acético glacial concentrado sobre a sutura pleural esclerotizada da coxa.",
+            "Fervura vigorosa dos indivíduos em solução aquosa de soda cáustica por quarenta minutos seguidos."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c3_q9",
+          context: "O valor pedagógico e a validade científica de uma coleção entomológica dependem da precisão dos registros afixados junto aos alfinetes entomológicos nos padrões universais de curadoria.",
+          prompt: "Quais informações devem constar obrigatoriamente na etiqueta de procedência geográfica e amostragem (1 cm x 2 cm)?",
+          options: [
+            "Nome comercial e formulação química do defensivo comumente aplicado na lavoura onde ocorreu a coleta.",
+            "Custo financeiro dos insumos agrícolas e estimativa percentual da perda de grãos provocada pela praga.",
+            "Telefone particular do proprietário rural e área territorial total da propriedade amostrada em hectares.",
+            "País, estado, município da coleta, data precisa do evento e o nome completo do respectivo coletor.",
+            "Classificação toxicológica do inseto para animais vertebrados e valor venal das sementes da cultura."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c3_q10",
+          context: "Acervos didáticos mantidos em caixas entomológicas de madeira forradas com isopor estão sujeitos à degradação por pragas de museu que consomem a quitina e o conteúdo interno dos espécimes secos.",
+          prompt: "Qual grupo de insetos destaca-se como principal praga de coleções biológicas e qual medida preservativa deve ser adotada?",
+          options: [
+            "Moscas da família Culicidae; manter a caixa aberta em ambiente de elevada umidade atmosférica.",
+            "Gafanhotos da família Acrididae; borrifar soluções alcoólicas diretamente sobre as asas secas na caixa.",
+            "Lagartas de Lepidoptera; expor a coleção permanentemente à radiação solar direta ultravioleta em sala.",
+            "Tripes fitófagos; congelar a caixa quinzenalmente em câmaras frigoríficas industriais sem vedação.",
+            "Besouros da família Dermestidae; manter a caixa hermeticamente vedada com cristais de naftalina."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c3_q11",
+          context: "A montagem de lepidópteros (borboletas e mariposas) em caixas entomológicas exige a preservação das escamas alares e a correta exposição da venação para chaveamento taxonômico.",
+          prompt: "Qual invólucro temporário de papel é preconizado para acomodar lepidópteros logo após a coleta no campo?",
+          options: [
+            "Envelopes triangulares dobrados confeccionados em papel vegetal liso que impedem o atrito das asas.",
+            "Tubos de ensaio com algodão comprimido embebido em querosene doméstico para manter a fixação alar.",
+            "Sacos plásticos herméticos transparentes preenchidos com água destilada fria para evitar a dessecação.",
+            "Frascos de vidro de boca larga contendo serragem grossa de madeira tratada para absorção de escamas.",
+            "Caixas de papelão corrugado abertas contendo folhas frescas da planta hospedeira para alimentação."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c3_q12",
+          context: "Na alfinetagem direta de insetos adultos de médio e grande porte, a literatura técnica estabelece pontos de inserção padronizados no tórax para não destruir estruturas morfológicas de valor taxonômico.",
+          prompt: "Em qual região do corpo do inseto deve ser inserido o alfinete entomológico na montagem clássica?",
+          options: [
+            "No centro exato do vértice da cabeça, transpassando o aparelho bucal para manter a mandíbula aberta.",
+            "No tórax do espécime (lado direito nos besouros e percevejos), mantendo o inseto nivelado horizontalmente.",
+            "No centro do abdômen entre o quinto e o sexto urostérnitos para evitar ferir as pernas torácicas articuladas.",
+            "Na asa anterior esquerda membranosa, fixando-a diretamente contra a base de isopor da caixa de madeira.",
+            "No colo cervical membranoso entre a cabeça e o protórax para permitir o giro visual contínuo do inseto."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c3_q13",
+          context: "Os alfinetes entomológicos diferenciam-se dos alfinetes de costura convencionais por apresentarem comprimento uniforme e diâmetros padronizados internacionalmente por códigos numéricos.",
+          prompt: "Como varia a espessura e flexibilidade dos alfinetes entomológicos de acordo com a sua numeração?",
+          options: [
+            "A numeração é aleatória, correspondendo unicamente ao tipo de liga metálica empregada na ponta cônica.",
+            "Os números maiores (como 6 e 7) são os mais finos e maleáveis, usados em pernilongos e microvespas.",
+            "Os números menores (como 000, 00 e 0) são os mais finos e delicados, e os maiores (4 a 7) são mais grossos.",
+            "Todos os alfinetes possuem o mesmo diâmetro cilíndrico exato, variando somente o comprimento da haste.",
+            "A numeração reflete a densidade de verniz antioxidante, sendo os alfinetes ímpares para insetos aquáticos."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c3_q14",
+          context: "Em pastagens cultivadas com gramíneas forrageiras e campos de trigo, a amostragem de insetos saltadores e pequenos coleópteros desfolhadores exige o varrimento físico da vegetação.",
+          prompt: "Qual equipamento entomológico manual é projetado com aro metálico e tecido grosso para varredura de pastos?",
+          options: [
+            "Puçá cônico leve com filó transparente utilizado na captura manual de mariposas em pleno voo.",
+            "Pinça anatômica curva com dentes finos usada para arrancar percevejos abrigados no colo da planta.",
+            "Aspirador mecânico elétrico de alta potência acoplado a baterias de chumbo para sucção de serapilheira.",
+            "Rede entomológica de varredura (rapiché), construída com tecido resistente para suportar o atrito.",
+            "Guarda-chuva invertido forrado com plástico impermeável escuro para batimento de raízes secas."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c3_q15",
+          context: "O monitoramento da densidade populacional de moscas-das-frutas em pomares de manga do Vale do Jaguaribe ou Inhamuns requer atrativos alimentares voláteis específicos.",
+          prompt: "Qual substância atrativa alimentar líquida abastece o interior da armadilha McPhail em pomares comerciais?",
+          options: [
+            "Solução alcoólica de etanol puro a noventa e seis por cento com aditivos inseticidas clorados secos.",
+            "Óleo mineral emulsionável diluído com sulfato de cobre para impedir o desenvolvimento de bactérias.",
+            "Melaço de cana fermentado concentrado misturado com inseticidas neurotóxicos de ação fumigante rápida.",
+            "Água boricada destilada tamponada associada a essências sintéticas de eucalipto e citronela concentrada.",
+            "Proteína hidrolisada diluída em água ou sucos de frutas fermentados que exalam odores atrativos proteicos."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c3_q16",
+          context: "A armadilha de bandejas coloridas (armadilha Moericke) atua atraindo insetos voadores que respondem positivamente a estímulos visuais específicos da radiação solar refletida.",
+          prompt: "Por qual razão técnica adiciona-se uma pequena quantidade de detergente neutro à água na armadilha Moericke?",
+          options: [
+            "Para quebrar a tensão superficial da água, fazendo com que o inseto afunde imediatamente ao pousar.",
+            "Para atrair quimicamente os insetos pelo odor de ésteres graxos saponificados presentes no sabão.",
+            "Para clarear a cutícula do espécime facilitando a visualização de asas sob microscópio de luz polarizada.",
+            "Para dissolver completamente as gorduras internas permitindo a secagem instantânea do esqueleto fora d'água.",
+            "Para tingir as cerdas dos afídeos facilitando a identificação morfológica direta a olho nu na lavoura."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c3_q17",
+          context: "Ao estruturar uma coleção entomológica didática no Curso Técnico em Agropecuária, a disposição interna dos exemplares deve refletir a sistemática e a hierarquia biológica do Reino Animal.",
+          prompt: "Qual critério técnico-didático de organização interna deve ser seguido na caixa entomológica da disciplina?",
+          options: [
+            "Organização aleatória baseada unicamente na data cronológica de entrada de cada exemplar na escola.",
+            "Organização padronizada por Ordens taxonômicas e Famílias, com etiquetas biológicas e alfinetes alinhados.",
+            "Distribuição estética baseada no tamanho físico e nas cores das asas dos insetos em degradê visual contínuo.",
+            "Separação obrigatória entre insetos capturados no período diurno e espécimes amostrados em noites chuvosas.",
+            "Agrupamento exclusivo por valor comercial do inseticida recomendado para a sua eliminação em lavouras."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c3_q18",
+          context: "O sacrifício imediato de insetos coletados para alfinetagem direta deve ocorrer de forma rápida para impedir que o espécime debata-se e quebre as asas ou pernas dentro do frasco.",
+          prompt: "Qual substância química volátil é comumente empregada em frascos letais (câmaras mortíferas) para esse fim?",
+          options: [
+            "Água sanitária concentrada vertida sobre carvão ativado em pó no fundo do recipiente coletor vedado.",
+            "Cal virgem hidratada associada a cristais de enxofre em pó colocados sob papel de filtro grosso seco.",
+            "Acetato de etila gotejado sobre uma camada absorvente de gesso ou algodão no fundo do frasco de vidro.",
+            "Formol líquido a quarenta por cento misturado com óleo vegetal para acelerar a asfixia pulmonar traqueal.",
+            "Gás butano comprimido liberado por válvulas mecânicas manuais acopladas à tampa rosqueada do frasco."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c3_q19",
+          context: "A identificação de pragas agrícolas em laboratório requer frequentemente o envio de amostras biológicas para especialistas e centros credenciados pelo Ministério da Agricultura.",
+          prompt: "Qual banco de dados oficial do governo brasileiro regulamenta o registro e o acesso às coleções biológicas científicas?",
+          options: [
+            "Sistema Integrado de Informações Toxicológicas da Agência Nacional de Vigilância Sanitária (ANVISA).",
+            "Cadastro Geral de Agrotóxicos e Defensivos Agrícolas do Ministério do Desenvolvimento Agrário (MDA).",
+            "Banco de Patentes Industriais e Desenhos Anatômicos do Instituto Nacional da Propriedade Industrial.",
+            "Cadastro Nacional de Coleções Biológicas (CNCB) vinculado ao Sistema de Autorização e Informação (SisBio).",
+            "Registro Nacional de Cultivares e Proteção de Cultivares da Embrapa Recursos Genéticos e Biotecnologia."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c3_q20",
+          context: "Em salas de aula e laboratórios de escolas técnicas, o armazenamento de coleções biológicas secas requer controle constante de fatores microclimáticos ambientais.",
+          prompt: "Quais condições de ambiente físico asseguram a melhor conservação das caixas entomológicas contra fungos?",
+          options: [
+            "Locais subterrâneos completamente úmidos com temperatura constante acima de trinta e cinco graus Celsius.",
+            "Exposição contínua à luz solar direta sobre bancadas abertas com alta incidência de ventos quentes.",
+            "Manutenção em estufas de circulação forçada aquecidas a sessenta graus Celsius com portas entreabertas.",
+            "Armazenamento em armários herméticos junto a reagentes oxidantes ácidos voláteis sem controle térmico.",
+            "Ambientes secos, arejados, escuros ou ao abrigo de luz solar direta, com controle contínuo de umidade."
+          ],
+          correct: 4 // E
+        }
+      ],
+
+      cap4: [
+        {
+          id: "c4_q1",
+          context: "O ciclo de vida dos insetos é caracterizado pela capacidade de sincronizar a atividade reprodutiva e as quebras de diapausa com as janelas temporais de maior disponibilidade de hospedeiros no campo.",
+          prompt: "Quais são os mecanismos integrados responsáveis pela sincronização reprodutiva dos insetos com o ecossistema?",
+          options: [
+            "Respostas fisiológicas a fatores externos associadas à regulação do sistema neuroendócrino por hormônios.",
+            "Variações da pressão osmótica na hemolinfa comandadas pelo batimento do canal alimentar posterior.",
+            "Contração espontânea dos músculos das mandíbulas induzida pela alcalinidade dos tecidos vegetais.",
+            "Oscilações na espessura do esclerito torácico decorrentes do atrito contínuo com os caules secos no campo.",
+            "Alterações mecânicas na permeabilidade traqueal geradas pela velocidade de circulação do ar externo."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c4_q2",
+          context: "A atração sexual em espécies fitófagas noturnas ou que colonizam dosséis florestais densos depende de sinais físicos acústicos capazes de percorrer distâncias consideráveis com baixo custo bioenergético.",
+          prompt: "Quais órgãos e mecanismos anatômicos produzem o sinal sonoro em machos de cigarras (Cicadidae) e em gafanhotos/grilos (Orthoptera)?",
+          options: [
+            "Atrito mecânico de mandíbulas nas cigarras e expulsão forçada de hemolinfa nos ortópteros pelo espiráculo.",
+            "Órgãos timbais abdominais nas cigarras e fricção mecânica de estruturas corporais (estridulação) nos ortópteros.",
+            "Vibração rápida das asas membranosas nas cigarras e percussão de cercos anais nos gafanhotos e grilos no solo.",
+            "Expansão brusca de sacos aéreos torácicos nas cigarras e batimento de antenas cefálicas nos ortópteros.",
+            "Raspagem de espiráculos laterais nas cigarras e choque de élitros na vegetação nos gafanhotos e grilos."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c4_q3",
+          context: "A comunicação química entre indivíduos da mesma espécie por meio de semioquímicos voláteis atua como o principal mecanismo de localização pré-copulatória em diversas ordens de insetos.",
+          prompt: "Como se definem os feromônios sexuais e de que forma os machos realizam a orientação sensorial até a fêmea?",
+          options: [
+            "Compostos hormonais ingeridos com a seiva foliar que provocam a atração visual direta pelo brilho da fêmea.",
+            "Toxinas repelentes que a fêmea elimina no solo para afastar predadores enquanto aguarda machos vizinhos.",
+            "Substâncias químicas voláteis liberadas pelas fêmeas percebidas pelas antenas dos machos em voo orientado.",
+            "Enzimas estomacais eliminadas com as fezes que induzem a emissão de sons estridulatórios na vegetação.",
+            "Proteínas salivares secretadas na cutícula do parceiro que bloqueiam a ecdise das larvas concorrentes."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c4_q4",
+          context: "Em diversas ordens de insetos, a transferência de recursos pelo macho transcende o mero fornecimento de gametas masculinos, assumindo papel relevante no balanço metabólico da fêmea receptora.",
+          prompt: "O que é o espermatóforo transferido durante o acoplamento e qual benefício biológico ele acarreta à fêmea?",
+          options: [
+            "Um tampão esclerotizado definitivo que sela a vagina fêmea, impedindo o egresso de ovos inférteis no limbo.",
+            "Um duto cuticular descartável que viabiliza a oxigenação direta das câmaras uterinas durante o voo nupcial.",
+            "Uma secreção glandular repelente que disfarça a presença da parceira perante predadores carnívoros em campo.",
+            "Uma cápsula com espermatozoides e nutrientes que a fêmea absorve para suprir custos da ovogênese.",
+            "Um envoltório calcário de proteção mecânica depositado no solo para abrigar ninfas recém-eclodidas na terra."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c4_q5",
+          context: "O canibalismo sexual representa uma estratégia comportamental documentada em predadores da ordem Mantodea, cuja interpretação evolutiva relaciona-se à alocação de biomassa na reprodução.",
+          prompt: "Qual o significado adaptativo e funcional do consumo do macho pela fêmea de louva-a-deus durante ou após a cópula?",
+          options: [
+            "Eliminar machos portadores de alelos recessivos deletérios que possam comprometer as próximas gerações no ninho.",
+            "Desobstruir mecanicamente o ovipositor para permitir a inserção de ovos isolados em galerias lenhosas secas.",
+            "Regular a densidade demográfica populacional da espécie visando evitar competição intraespecífica no dossel vegetal.",
+            "Permitir que o abdômen masculino permaneça fecundando os óvulos de forma autônoma após a ingestão cefálica.",
+            "Fornecer nutrientes e biomassa do corpo do macho que são imediatamente incorporados na produção dos ovos."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c4_q6",
+          context: "Rainhas de formigas saúvas e abelhas realizam voos nupciais restritos e mantêm-se férteis por anos sucessivos, realizando posturas de milhões de ovos fecundados sem necessidade de novos machos.",
+          prompt: "Qual estrutura do aparelho reprodutor das fêmeas de insetos é especializada no armazenamento prolongado de gametas masculinos viáveis?",
+          options: [
+            "Espermateca, órgão saciforme que retém, nutre e mantém viáveis os espermatozoides por longos períodos.",
+            "Bursa copulatrix, câmara muscular estomacal encarregada de digerir o excesso de espermatozoides velhos.",
+            "Oviduto lateral, duto glandular responsável pela síntese do vitelo proteico primário dos ovócitos na gônada.",
+            "Edeago feminino, apêndice motor articulado especializado em colher esperma disperso na folhagem da cultura.",
+            "Glândula colateral, tecido excretor membranoso responsável por eliminar resíduos nitrogenados na cópula."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c4_q7",
+          context: "Em cultivos protegidos de tomate e pimentão, colônias de pulgões (Aphididae) demonstram um crescimento populacional logarítmico extremamente rápido em janelas climáticas favoráveis.",
+          prompt: "Qual modalidade reprodutiva assexuada explica essa velocidade geométrica de colonização e multiplicação dos afídeos?",
+          options: [
+            "Poliembrionia massiva, onde um ovo fecundado gera centenas de ninfas através de sucessivas clivagens mitóticas.",
+            "Partenogênese facultativa, na qual fêmeas produzem progênie vigorosa a partir de ovos não fecundados.",
+            "Ovoviviparidade adenotrófica estrita, em que larvas pupam dentro do corpo materno antes do nascimento em folha.",
+            "Hermafroditismo sequencial cíclico, onde cada indivíduo fecunda os próprios óvulos com seus gametas funcionais.",
+            "Neotenia reprodutiva patológica, que antecipa a maturidade reprodutiva de ovos inviáveis retidos no solo."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c4_q8",
+          context: "Em um talhão de milho atacado por percevejos barriga-verde, o técnico observa simultaneamente insetos adultos alados e formas juvenis desprovidas de asas completas, mas morfologicamente similares aos adultos.",
+          prompt: "Qual padrão ontogenético pós-embrionário caracteriza esses hemípteros e qual termo técnico designa as formas imaturas terrestres?",
+          options: [
+            "Desenvolvimento ametábolo direto, cujas formas juvenis idênticas ao adulto são denominadas imagos ápteros.",
+            "Desenvolvimento holometábolo completo, cujas formas intermediárias vermiformes recebem o nome de larvas.",
+            "Desenvolvimento hemimetábolo gradual, cujas formas imaturas terrestres são tecnicamente denominadas ninfas.",
+            "Desenvolvimento criptometábolo larval, cujas formas jovens carnívoras são chamadas estritamente de náiades.",
+            "Desenvolvimento anfibiótico aquático, cujas formas intermediárias encerram-se sob casulos de pupação."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c4_q9",
+          context: "As ordens que reúnem o maior número de espécies animais e o mais expressivo sucesso evolutivo no planeta (Coleoptera, Lepidoptera, Diptera e Hymenoptera) compartilham o desenvolvimento holometábolo.",
+          prompt: "Sob a perspectiva ecológica e agronômica, qual é a principal vantagem adaptativa conferida pela metamorfose completa?",
+          options: [
+            "Possibilitar a unificação dos requerimentos térmicos e hídricos entre todas as fases vitais do ciclo em campo.",
+            "Eliminar a necessidade de ecdises cuticulares periódicas durante o crescimento dos estágios juvenis na folha.",
+            "Restringir a ingestão de alimento exclusivamente ao estágio adulto, poupando energia durante a fase larval ativa.",
+            "Separar os nichos ecológicos e alimentares de larvas e adultos, suprimindo a competição intraespecífica.",
+            "Garantir a postura de ovos com casca espessa e impermeável capaz de resistir a invernos rigorosos em fendas."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c4_q10",
+          context: "Durante o crescimento dos insetos, a inextensibilidade do exoesqueleto rígido esclerotizado exige sua substituição periódica por meio de um processo coordenado hormonalmente em duas etapas biológicas sucessivas.",
+          prompt: "Quais são as duas etapas consecutivas que definem a muda e como se denomina a cutícula velha descartada?",
+          options: [
+            "Metamorfose e fecundação; a carapaça velha rompida e deixada na planta recebe o nome de pupário escuro.",
+            "Estridulação e pupação; a estrutura esclerotizada descartada pelo indivíduo denomina-se ooteca residual.",
+            "Diapausa e ovogênese; o invólucro membranoso residual desprendido no substrato chama-se edeago masculino.",
+            "Tanatose e esclerotização; o resíduo quitinoso transparente abandonado no ramo chama-se espermatóforo nupcial.",
+            "Apólise e ecdise; o exoesqueleto antigo rompido e abandonado pelo inseto no vegetal denomina-se exúvia."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c4_q11",
+          context: "Em hexápodes basais desprovidos primitivamente de asas, como os representantes da ordem Archaeognatha (traças saltadoras), o crescimento ocorre sem mudanças anatômicas radicais.",
+          prompt: "Como se denomina esse padrão de desenvolvimento direto e qual a relação morfológica entre filhotes e adultos?",
+          options: [
+            "Desenvolvimento ametábolo; os jovens eclodem muito semelhantes aos adultos, diferindo no porte e maturidade sexual.",
+            "Desenvolvimento holometábolo; os filhotes eclodem vermiformes e sofrem pupação obrigatória em células de terra.",
+            "Desenvolvimento hemimetábolo; os jovens possuem náiades branquiais que migram para o meio terrestre no inverno.",
+            "Desenvolvimento heterometábolo; os indivíduos eclodem com asas funcionais completas prontas para o voo nupcial.",
+            "Desenvolvimento hipermetábolo; as larvas alternam fases mastigadoras carnívoras e estágios ápodes parasitas."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c4_q12",
+          context: "Nos insetos hemimetábolos com fase imatura aquática (como na ordem Odonata), a biologia dos juvenis apresenta peculiaridades respiratórias e ecológicas distintas das ninfas terrestres.",
+          prompt: "Qual denominação técnica é atribuída às formas jovens aquáticas dos insetos hemimetábolos?",
+          options: [
+            "Crisálidas, que permanecem submersas em diapausa até que ocorra a dessecação completa do canal de irrigação.",
+            "Náiades, formas juvenis aquáticas que respiram por brânquias e emergem da água para a muda imaginal final.",
+            "Pupas exaratas, que nadam ativamente por meio de apêndices abdominais carnosos providos de ganchos pares.",
+            "Ootecas aquáticas, estruturas celulares cimentadas sob pedras submersas que liberam adultos já alados.",
+            "Imagotes pelágicos, formas adultas diminutas que se alimentam exclusivamente de zooplâncton estuarino."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c4_q13",
+          context: "A diversidade morfológica das fases de pupa nos insetos holometábolos reflete a mobilidade relativa de seus apêndices corporais e a presença ou ausência de mandíbulas articuladas.",
+          prompt: "Como se classificam tecnicamente as pupas das borboletas e mariposas (crisálidas), cujos apêndices ficam soldados ao corpo?",
+          options: [
+            "Pupas exaratas décticas, dotadas de apêndices totalmente livres e mandíbulas móveis altamente funcionais.",
+            "Pupas coarctadas, encerradas obrigatoriamente no interior da exúvia do último instar larval endurecido.",
+            "Pupas obtectas adécticas, apresentando apêndices colados ao corpo por secreção e sem mandíbulas móveis.",
+            "Pupas vermiformes carnosas, desprovidas de cutícula rígida e capazes de locomoção ativa por pseudopés.",
+            "Pupas compostas móveis, providas de nadadeiras abdominais e mandíbulas carnívoras preênseis no solo."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c4_q14",
+          context: "A identificação das larvas de insetos-praga a campo fundamenta-se na contagem e distribuição de apêndices locomotores torácicos e abdominais presentes no espécime.",
+          prompt: "Qual diagnóstico anatômico diferencia uma larva do tipo polípode (lagarta de Lepidoptera) de uma larva oligópode?",
+          options: [
+            "A larva polípode é completamente desprovida de pernas, enquanto a larva oligópode possui dez pares torácicos.",
+            "A larva polípode possui cerdas branquiais natatórias, enquanto a oligópode possui pernas anteriores em pinça.",
+            "A larva polípode possui mandíbulas sugadoras ocas, enquanto a oligópode alimenta-se por aparelho lambedor.",
+            "A larva polípode possui 3 pares torácicos e falsas pernas abdominais; a oligópode tem apenas 3 pares torácicos.",
+            "A larva polípode encerra-se em ooteca no solo, enquanto a larva oligópode passa por desenvolvimento direto."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c4_q15",
+          context: "As larvas de moscas (Diptera) e de certas brocas de madeira da ordem Coleoptera apresentam redução extrema de apêndices decorrente da vida endofítica ou saprófaga.",
+          prompt: "Como se denominam tecnicamente as larvas vermiformes que não possuem nenhum tipo de perna locomotora?",
+          options: [
+            "Larvas campodeiformes, dotadas de corpo achatado e apêndices torácicos ágeis para caça ativa no dossel.",
+            "Larvas escarabeiformes, caracterizadas por corpo curvado em 'C' com três pares de pernas torácicas longas.",
+            "Larvas eruciformes, que portam pernas torácicas articuladas associadas a pseudopés anais fixadores de folha.",
+            "Larvas elateriformes, providas de corpo cilíndrico rígido e esclerotizado com pernas reduzidas no protórax.",
+            "Larvas ápodes, cujo corpo mole e vermiforme é totalmente desprovido de apêndices locomotores articulados."
+          ],
+          correct: 4 // E
+        },
+        {
+          id: "c4_q16",
+          context: "A cópula em insetos pterigotos envolve acoplamento mecânico preciso entre a genitália masculina e os receptáculos genitais da fêmea.",
+          prompt: "Qual órgão copulatório masculino é introduzido diretamente na câmara genital feminina durante o acasalamento?",
+          options: [
+            "O edeago, estrutura genital masculina esclerotizada responsável pela transferência direta de gametas à fêmea.",
+            "O ovipositor telescópico, apêndice modificado do nono segmento encarregado de recolher o espermatóforo.",
+            "O cerco copulatório anal, apêndice sensorial caudal utilizado para armazenar os espermatozoides nutritivos.",
+            "O fúrcula abdominal, estrutura elástica ventral destinada a ejetar os espermatozoides na corrente aérea.",
+            "O palpo maxilar distal, apêndice bucal articulado que insere pacotes de esperma através dos espiráculos."
+          ],
+          correct: 0 // A
+        },
+        {
+          id: "c4_q17",
+          context: "Algumas espécies de moscas hematófagas (como a mosca tsé-tsé, Glossinidae) retêm a larva no trato genital materno alimentando-a com secreções especializadas até a maturidade larval.",
+          prompt: "Como se classifica essa modalidade singular de viviparidade observada em dípteros da família Glossinidae?",
+          options: [
+            "Viviparidade hemocélica, na qual as larvas nadam na hemolinfa torácica absorvendo glicose por difusão cutânea.",
+            "Viviparidade adenotrófica, na qual a larva eclode no útero e nutre-se de secreções glandulares acessórias maternas.",
+            "Viviparidade pseudoplacentária estrita, em que há vasos sanguíneos verdadeiros conectando o coração à larva.",
+            "Oviparidade com incubação externa forçada sob a cutícula protorácica endurecida de machos da mesma colônia.",
+            "Partenogênese telítoca obrigatória, na qual ovócitos desenvolvem-se livres em câmaras de seda comunitárias."
+          ],
+          correct: 1 // B
+        },
+        {
+          id: "c4_q18",
+          context: "A seleção sexual entre machos por acesso a fêmeas receptivas manifesta-se em combates físicos e disputas visuais ritualizadas em várias famílias de insetos.",
+          prompt: "Qual família de dípteros destaca-se na entomologia pela presença de olhos compostos situados na extremidade de longos pedúnculos cefálicos laterais?",
+          options: [
+            "Família Tephritidae, cujos machos utilizam os pedúnculos oculares para perfurar a epiderme de mangas maduras.",
+            "Família Culicidae, cujos olhos pedunculados servem exclusivamente para detectar calor corporal de mamíferos.",
+            "Família Diopsidae, cujos machos realizam combates visuais comparando a envergadura de seus pedúnculos oculares.",
+            "Família Tachinidae, cujos pedúnculos oculares alojam glândulas de seda para prender lagartas desfolhadoras.",
+            "Família Muscidae, cujas fêmeas utilizam a visão lateral para selecionar substratos fecais úmidos no pasto."
+          ],
+          correct: 2 // C
+        },
+        {
+          id: "c4_q19",
+          context: "Em certas espécies de besouros com acentuado dimorfismo nos chifres cefálicos (como Onthophagus taurus), machos com menor porte físico não enfrentam diretamente os machos dominantes.",
+          prompt: "Qual estratégia reprodutiva comportamental alternativa é adotada por esses machos menores desprovidos de armas robustas?",
+          options: [
+            "Emitem feromônios de alarme que provocam a dispersão desordenada de todos os insetos do ninho subterrâneo.",
+            "Consomem as posturas de ovos fertilizados pelos machos dominantes para forçar as fêmeas a novo acasalamento.",
+            "Entram em tanatose permanente na entrada da galeria até que o macho dominante morra por inanição natural.",
+            "Adotam comportamento furtivo, cavando rotas secundárias discretas para acessar e fecundar as fêmeas no túnel.",
+            "Modificam seu aparelho bucal para picador-sugador, alimentando-se da hemolinfa do macho dominante rival."
+          ],
+          correct: 3 // D
+        },
+        {
+          id: "c4_q20",
+          context: "No momento da emergência do inseto adulto a partir do último instar ninfal ou do estágio pupal, o indivíduo recém-saído da exúvia apresenta corpo mole e asas ainda não estendidas.",
+          prompt: "Qual termo técnico designa o inseto adulto recém-emergido da muda antes da esclerotização e pigmentação final de sua cutícula?",
+          options: [
+            "Espécime fóssil imaturo, que necessita de radiação solar direta ultravioleta para iniciar a divisão mitótica.",
+            "Indivíduo em diapausa imaginal, cujo metabolismo energético permanece paralisado por várias semanas no solo.",
+            "Náiade reprodutiva, forma que conserva brânquias operacionais no abdômen durante o voo de acasalamento.",
+            "Larva de quarto instar reativa, caracterizada por carapaça espessa provida de espinhos defensivos moles.",
+            "Adulto teneral, que engole ar e bombeia hemolinfa para expandir corpo e asas antes do endurecimento cuticular."
+          ],
+          correct: 4 // E
+        }
+      ]
+    };
+
+
+    /* =========================================================================
+       CONFIGURAÇÃO DO FIREBASE — PREENCHA COM OS DADOS DO SEU PROJETO
+       =========================================================================
+       1. Acesse https://console.firebase.google.com
+       2. Crie um projeto gratuito (ex: "entomologia-quiz")
+       3. Dentro do projeto, clique no ícone "</>" (Web) para adicionar um app Web
+       4. Copie o objeto "firebaseConfig" que aparece e cole substituindo o de baixo
+       5. No menu lateral, vá em "Firestore Database" -> "Criar banco de dados"
+          (pode escolher qualquer região, ex: southamerica-east1 / São Paulo)
+       6. Nas Regras (Rules) do Firestore, cole as regras fornecidas junto com
+          este arquivo (arquivo firestore.rules) e publique.
+       ========================================================================= */
+    const firebaseConfig = {
+      apiKey: "AIzaSyDFExzUXhYeSGtcbyL4F1ty4CwwNylySNo",
+      authDomain: "entomologia-quiz-b55e8.firebaseapp.com",
+      projectId: "entomologia-quiz-b55e8",
+      storageBucket: "entomologia-quiz-b55e8.firebasestorage.app",
+      messagingSenderId: "681196477251",
+      appId: "1:681196477251:web:de38f5f72635f5800cadf6"
+    };
+
+    const FIREBASE_READY = firebaseConfig.apiKey && firebaseConfig.apiKey.indexOf("COLOQUE_AQUI") === -1;
+
+    let db = null;
+    if (FIREBASE_READY) {
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.firestore();
+    } else {
+      console.warn("Firebase não configurado. Preencha firebaseConfig no código-fonte.");
+    }
+
+    function showFirebaseWarningIfNeeded() {
+      if (!FIREBASE_READY) {
+        const loginBanner = document.getElementById("login-firebase-banner");
+        if (loginBanner) loginBanner.style.display = "block";
+        const teacherBanner = document.getElementById("firebase-setup-banner");
+        if (teacherBanner) teacherBanner.style.display = "block";
+      }
+    }
+
+    /* =========================================================================
+       ESTADO GLOBAL
+       ========================================================================= */
+    let state = {
+      currentUser: "",
+      currentQuizId: "cap1",
+      activeQuestions: [],
+      currentIndex: 0,
+      userAnswers: {},
+      isQuizActive: false,
+      isTestMode: false,
+      isApostilaModalOpen: false,
+      isFraudModalOpen: false,
+      sessionId: null,
+      heartbeatTimer: null
+    };
+
+    // Listeners ativos do painel do professor (para poder desligar ao sair)
+    let teacherUnsubscribers = [];
+    let latestOnlineSessions = [];
+    let onlineListRefreshTimer = null;
+
+    function studentKeyOf(name) {
+      return name.trim().toLowerCase();
+    }
+
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    /* =========================================================================
+       AUTENTICAÇÃO E NAVEGAÇÃO
+       ========================================================================= */
+    function handleLogin() {
+      const nameInput = document.getElementById("input-name");
+      const keywordInput = document.getElementById("input-keyword");
+      const quizSelect = document.getElementById("input-quiz");
+      const errorDiv = document.getElementById("login-error");
+
+      const name = nameInput.value.trim();
+      const keyword = keywordInput.value.trim().toLowerCase();
+      const quizId = quizSelect.value;
+
+      errorDiv.style.display = "none";
+      errorDiv.innerText = "";
+
+      if (!FIREBASE_READY) {
+        errorDiv.innerText = "O sistema ainda não foi configurado pelo professor (banco de dados não conectado). Tente novamente mais tarde.";
+        errorDiv.style.display = "block";
+        return;
+      }
+
+      if (!name) {
+        errorDiv.innerText = "Por favor, digite seu nome completo para identificação.";
+        errorDiv.style.display = "block";
+        return;
+      }
+
+      if (!keyword) {
+        errorDiv.innerText = "Por favor, informe a palavra-chave de acesso.";
+        errorDiv.style.display = "block";
+        return;
+      }
+
+      // 1. Acesso do Professor
+      if (keyword === "professor") {
+        keywordInput.value = "";
+        showView("view-teacher");
+        startTeacherDashboard();
+        return;
+      }
+
+      // 2. Acesso em Modo Teste
+      if (keyword === "teste") {
+        startTestQuiz(name);
+        return;
+      }
+
+      // 3. Acesso Real do Estudante
+      if (keyword === "charles") {
+        startQuiz(name, quizId);
+        return;
+      }
+
+      errorDiv.innerText = "Palavra-chave incorreta. Verifique o código com o docente.";
+      errorDiv.style.display = "block";
+    }
+
+    // Suporte ao clique na tecla ENTER nos campos de login
+    document.addEventListener("DOMContentLoaded", () => {
+      const nInput = document.getElementById("input-name");
+      const kInput = document.getElementById("input-keyword");
+      if (nInput) nInput.addEventListener("keypress", (e) => { if (e.key === "Enter") handleLogin(); });
+      if (kInput) kInput.addEventListener("keypress", (e) => { if (e.key === "Enter") handleLogin(); });
+      showFirebaseWarningIfNeeded();
+    });
+
+    function showView(viewId) {
+      document.getElementById("view-login").style.display = "none";
+      document.getElementById("view-quiz").style.display = "none";
+      document.getElementById("view-result").style.display = "none";
+      document.getElementById("view-teacher").style.display = "none";
+
+      document.getElementById(viewId).style.display = "block";
+      window.scrollTo(0, 0);
+    }
+
+    function stopHeartbeat() {
+      if (state.heartbeatTimer) {
+        clearInterval(state.heartbeatTimer);
+        state.heartbeatTimer = null;
+      }
+    }
+
+    function removeActiveSession() {
+      stopHeartbeat();
+      if (db && state.sessionId) {
+        db.collection("activeSessions").doc(state.sessionId).delete().catch(() => {});
+      }
+      state.sessionId = null;
+    }
+
+    function stopTeacherDashboard() {
+      teacherUnsubscribers.forEach(unsub => { try { unsub(); } catch (e) {} });
+      teacherUnsubscribers = [];
+      if (onlineListRefreshTimer) {
+        clearInterval(onlineListRefreshTimer);
+        onlineListRefreshTimer = null;
+      }
+    }
+
+    function returnToLogin() {
+      state.isQuizActive = false;
+      state.isTestMode = false;
+      removeActiveSession();
+      stopTeacherDashboard();
+      document.getElementById("input-keyword").value = "";
+      showView("view-login");
+    }
+
+    /* =========================================================================
+       PRESENÇA EM TEMPO REAL (SESSÃO ATIVA NO PAINEL DO PROFESSOR)
+       ========================================================================= */
+    function startActiveSession(studentName, quizLabel, totalQuestions) {
+      if (!db) return;
+      state.sessionId = "s_" + Date.now() + "_" + Math.random().toString(36).slice(2, 9);
+
+      const write = () => {
+        db.collection("activeSessions").doc(state.sessionId).set({
+          student: studentName,
+          quizLabel: quizLabel,
+          currentIndex: state.currentIndex + 1,
+          totalQuestions: totalQuestions,
+          lastHeartbeat: firebase.firestore.FieldValue.serverTimestamp(),
+          startedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(() => {});
+      };
+
+      write();
+      state.heartbeatTimer = setInterval(() => {
+        if (!db || !state.sessionId) return;
+        db.collection("activeSessions").doc(state.sessionId).update({
+          currentIndex: state.currentIndex + 1,
+          lastHeartbeat: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(() => {});
+      }, 8000);
+    }
+
+    /* =========================================================================
+       MODO TESTE (1 QUESTÃO DE DIAGNÓSTICO REGISTRADA NO BANCO)
+       ========================================================================= */
+    function startTestQuiz(studentName) {
+      state.currentUser = studentName;
+      state.currentQuizId = "teste";
+      state.isTestMode = true;
+      state.isQuizActive = true;
+      state.isApostilaModalOpen = false;
+      state.isFraudModalOpen = false;
+      state.currentIndex = 0;
+      state.userAnswers = {};
+
+      state.activeQuestions = [
+        {
+          id: "q_teste_acesso",
+          context: "Verificação de conectividade e acesso à plataforma de Entomologia Agrícola da EEEP Monsenhor Odorico de Andrade. Esta etapa tem por objetivo certificar que seu dispositivo móvel ou computador carregou perfeitamente todos os módulos do sistema para a avaliação do professor Charles Lobo Pinheiro.",
+          prompt: "Você conseguiu acessar hoje?",
+          options: [
+            "Sim, consegui acessar a plataforma normalmente.",
+            "Não, encontrei problemas para acessar o sistema."
+          ],
+          correct: 0
+        }
+      ];
+
+      document.getElementById("bar-student-name").innerText = studentName;
+      document.getElementById("bar-quiz-title").innerText = "Verificação Técnica de Acesso";
+      document.getElementById("btn-open-apostila").style.display = "none";
+      document.getElementById("quiz-warning-text").innerText = "ℹ️ Modo de Teste: sua confirmação será registrada na lista do professor.";
+      document.getElementById("q-total-count").innerText = "1";
+
+      showView("view-quiz");
+      renderQuestion();
+      startActiveSession(studentName, "Verificação Técnica", 1);
+    }
+
+    /* =========================================================================
+       EXECUÇÃO DO QUIZ OFICIAL COM SORTEIO DE 10 QUESTÕES
+       ========================================================================= */
+    const QUIZ_NAMES = {
+      cap1: "Capítulo 1 - Introdução e Importância",
+      cap2: "Capítulo 2 - Ordens e Características",
+      cap3: "Capítulo 3 - Coleção de Insetos",
+      cap4: "Capítulo 4 - Reprodução e Desenvolvimento"
+    };
+
+    function startQuiz(studentName, quizId) {
+      state.currentUser = studentName;
+      state.currentQuizId = quizId;
+      state.isTestMode = false;
+
+      const allChapterQuestions = QUESTION_BANK[quizId];
+      const shuffled = shuffleArray(allChapterQuestions);
+      state.activeQuestions = shuffled.slice(0, 10);
+
+      state.currentIndex = 0;
+      state.userAnswers = {};
+      state.isQuizActive = true;
+      state.isApostilaModalOpen = false;
+      state.isFraudModalOpen = false;
+
+      document.getElementById("bar-student-name").innerText = studentName;
+      document.getElementById("bar-quiz-title").innerText = QUIZ_NAMES[quizId];
+      document.getElementById("btn-open-apostila").style.display = "inline-flex";
+      document.getElementById("quiz-warning-text").innerText = "⚠️ Não saia desta página nem alterne de aplicativo. Isso anulará a tentativa atual com nota zero.";
+      document.getElementById("q-total-count").innerText = "10";
+
+      showView("view-quiz");
+      renderQuestion();
+      startActiveSession(studentName, QUIZ_NAMES[quizId], 10);
+    }
+
+    function renderQuestion() {
+      const q = state.activeQuestions[state.currentIndex];
+      const total = state.activeQuestions.length;
+
+      document.getElementById("q-current-index").innerText = state.currentIndex + 1;
+      document.getElementById("q-context").innerText = q.context;
+      document.getElementById("q-prompt").innerText = `${state.currentIndex + 1}. ${q.prompt}`;
+
+      const progressPercent = ((state.currentIndex) / total) * 100;
+      document.getElementById("quiz-progress-bar").style.width = `${progressPercent}%`;
+
+      const optionsContainer = document.getElementById("q-options");
+      optionsContainer.innerHTML = "";
+
+      const letters = ["A", "B", "C", "D", "E"];
+      q.options.forEach((optText, idx) => {
+        const item = document.createElement("div");
+        item.className = "option-item";
+        if (state.userAnswers[q.id] === idx) {
+          item.classList.add("selected");
+        }
+
+        item.onclick = () => selectOption(q.id, idx);
+
+        item.innerHTML = `
+          <div class="option-letter">${letters[idx]})</div>
+          <div class="option-text">${optText}</div>
+        `;
+        optionsContainer.appendChild(item);
+      });
+
+      const btnNext = document.getElementById("btn-next");
+      if (state.currentIndex === total - 1) {
+        btnNext.innerText = state.isTestMode ? "Confirmar Acesso" : "Finalizar e Entregar";
+      } else {
+        btnNext.innerText = "Avançar";
+      }
+    }
+
+    function selectOption(questionId, optionIndex) {
+      state.userAnswers[questionId] = optionIndex;
+      renderQuestion();
+    }
+
+    function nextQuestion() {
+      const q = state.activeQuestions[state.currentIndex];
+      if (state.userAnswers[q.id] === undefined) {
+        alert("Atenção: Selecione uma das alternativas antes de avançar.");
+        return;
+      }
+
+      if (state.currentIndex < state.activeQuestions.length - 1) {
+        state.currentIndex++;
+        renderQuestion();
+        window.scrollTo(0, 100);
+        if (db && state.sessionId) {
+          db.collection("activeSessions").doc(state.sessionId).update({
+            currentIndex: state.currentIndex + 1,
+            lastHeartbeat: firebase.firestore.FieldValue.serverTimestamp()
+          }).catch(() => {});
+        }
+      } else {
+        finishQuiz();
+      }
+    }
+
+    async function finishQuiz() {
+      state.isQuizActive = false;
+      removeActiveSession();
+
+      // 1. Tratamento da Submissão no MODO TESTE (Registra no banco de testes)
+      if (state.isTestMode) {
+        const selectedIdx = state.userAnswers["q_teste_acesso"];
+        const isYes = selectedIdx === 0;
+        const answerText = isYes ? "Sim" : "Não";
+        const statusText = isYes ? "Acesso Confirmado com Sucesso" : "Com Dificuldade no Acesso";
+
+        const testRecord = {
+          student: state.currentUser,
+          studentKey: studentKeyOf(state.currentUser),
+          answer: answerText,
+          date: new Date().toLocaleString("pt-BR"),
+          status: statusText,
+          success: isYes,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        try {
+          if (db) await db.collection("testAccess").add(testRecord);
+        } catch (e) {
+          console.error("Erro ao salvar registro de teste:", e);
+        }
+
+        document.getElementById("res-title").innerText = isYes ? "✅ Acesso Registrado com Sucesso!" : "⚠️ Relato de Dificuldade Registrado";
+        document.getElementById("res-subtitle").innerText = "Sua participação na verificação foi gravada no painel do professor.";
+        document.getElementById("res-stats-container").style.display = "none";
+
+        document.getElementById("res-message").innerHTML = `
+          <div style="background: ${isYes ? '#e8f5e9' : '#fff3e0'}; border: 1.5px solid ${isYes ? 'var(--primary)' : 'var(--warning)'}; border-radius: 10px; padding: 22px; margin-bottom: 20px;">
+            <h3 style="color: ${isYes ? 'var(--primary)' : 'var(--warning)'}; margin-bottom: 8px;">
+              ${isYes ? 'Presença / Conectividade Confirmada!' : 'Aviso Encaminhado ao Docente!'}
+            </h3>
+            <p style="font-size: 1.05rem; color: #222; font-weight: 600;">
+              Estudante: <strong>${state.currentUser}</strong>
+            </p>
+            <p style="font-size: 0.95rem; color: #444; margin-top: 6px;">
+              Resposta enviada: <strong>"${isYes ? 'Sim, consegui acessar a plataforma normalmente.' : 'Não, encontrei problemas para acessar o sistema.'}"</strong>
+            </p>
+            <p style="font-size: 0.9rem; color: #555; margin-top: 12px; line-height: 1.5;">
+              ${isYes
+                ? 'Seu nome já foi registrado na lista de estudantes que conseguiram acessar no painel do <strong>Professor Charles Lobo Pinheiro</strong>. Quando as avaliações forem iniciadas, utilize a palavra-chave informada por ele em sala de aula.'
+                : 'Seu aviso foi gravado na lista do professor para que ele possa prestar o suporte técnico necessário ao seu dispositivo.'}
+            </p>
+          </div>
+        `;
+
+        showView("view-result");
+        return;
+      }
+
+      // 2. Tratamento da Avaliação Oficial (Cálculo de Notas e Médias)
+      document.getElementById("res-title").innerText = "Avaliação Finalizada!";
+      document.getElementById("res-subtitle").innerText = "Confira a síntese do seu rendimento e sua situação geral na disciplina.";
+      document.getElementById("res-stats-container").style.display = "block";
+
+      let hits = 0;
+      const missedIds = [];
+
+      state.activeQuestions.forEach(q => {
+        if (state.userAnswers[q.id] === q.correct) {
+          hits++;
+        } else {
+          missedIds.push(q.id);
+        }
+      });
+
+      const score = hits; // 0 a 10
+      const percentage = (hits / state.activeQuestions.length) * 100;
+
+      const record = {
+        student: state.currentUser,
+        studentKey: studentKeyOf(state.currentUser),
+        quizId: state.currentQuizId,
+        score: score,
+        percentage: percentage,
+        date: new Date().toLocaleString("pt-BR"),
+        status: "Concluído",
+        missed: missedIds,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      try {
+        if (db) await db.collection("attempts").add(record);
+      } catch (e) {
+        console.error("Erro ao salvar tentativa:", e);
+      }
+
+      let studentRecords = [];
+      try {
+        if (db) {
+          const snap = await db.collection("attempts")
+            .where("studentKey", "==", studentKeyOf(state.currentUser))
+            .where("status", "==", "Concluído")
+            .get();
+          studentRecords = snap.docs.map(d => d.data());
+        }
+      } catch (e) {
+        console.error("Erro ao consultar histórico do aluno:", e);
+      }
+
+      const caps = ['cap1', 'cap2', 'cap3', 'cap4'];
+      const bestScores = {};
+
+      caps.forEach(c => {
+        const attempts = studentRecords.filter(r => r.quizId === c);
+        if (attempts.length > 0) {
+          bestScores[c] = Math.max(...attempts.map(r => r.score));
+        } else {
+          bestScores[c] = null;
+        }
+      });
+
+      document.getElementById("res-score").innerText = score.toFixed(1);
+      document.getElementById("res-percent").innerText = `${percentage.toFixed(0)}% de rendimento nesta tentativa (${hits} de 10)`;
+
+      caps.forEach((c, idx) => {
+        const box = document.getElementById(`box-c${idx+1}`);
+        const scoreSpan = document.getElementById(`score-c${idx+1}`);
+        if (bestScores[c] !== null) {
+          box.classList.remove('pending');
+          scoreSpan.innerText = bestScores[c].toFixed(1);
+        } else {
+          box.classList.add('pending');
+          scoreSpan.innerText = 'Pendente';
+        }
+      });
+
+      const sumAllBests = caps.reduce((acc, c) => acc + (bestScores[c] !== null ? bestScores[c] : 0.0), 0.0);
+      const finalAverage = sumAllBests / 4.0;
+      document.getElementById("res-final-average").innerText = finalAverage.toFixed(1);
+
+      const allCompleted = caps.every(c => bestScores[c] !== null);
+      const statusElement = document.getElementById("res-final-status");
+      if (allCompleted) {
+        if (finalAverage >= 6.0) {
+          statusElement.innerText = "Situação: APROVADO NA DISCIPLINA!";
+          statusElement.style.color = "var(--success)";
+        } else {
+          statusElement.innerText = "Situação: Média Geral Abaixo de 6.0 (Tente novamente)";
+          statusElement.style.color = "var(--danger)";
+        }
+      } else {
+        const pendingCount = caps.filter(c => bestScores[c] === null).length;
+        statusElement.innerText = `Situação: Em Andamento (${pendingCount} ${pendingCount > 1 ? 'capítulos pendentes' : 'capítulo pendente'})`;
+        statusElement.style.color = "var(--warning)";
+      }
+
+      let msg = "";
+      if (score >= 8.0) {
+        msg = `Excelente desempenho técnico, <strong>${state.currentUser}</strong>! Você demonstrou elevado domínio na interpretação conceitual e diagnose em Entomologia Agrícola.`;
+      } else if (score >= 6.0) {
+        msg = `Desempenho satisfatório, <strong>${state.currentUser}</strong>. Você atingiu a média neste capítulo. Lembre-se de que pode tentar novamente para buscar a nota 10 e elevar sua Média Final!`;
+      } else {
+        msg = `Atenção, <strong>${state.currentUser}</strong>. Rendimento abaixo da média nesta tentativa. Revise os conceitos na apostila e tente novamente; apenas sua maior nota será computada.`;
+      }
+      document.getElementById("res-message").innerHTML = msg;
+
+      showView("view-result");
+    }
+
+    /* =========================================================================
+       SISTEMA ANTIFRAUDE BLINDADO (DESATIVADO NO MODO TESTE)
+       ========================================================================= */
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && state.isQuizActive && !state.isApostilaModalOpen && !state.isFraudModalOpen && !state.isTestMode) {
+        triggerFraudAbort("Detectada alternância de aba ou minimização da janela da prova.");
+      }
+    });
+
+    window.addEventListener("blur", () => {
+      if (state.isQuizActive && !state.isApostilaModalOpen && !state.isFraudModalOpen && !state.isTestMode) {
+        triggerFraudAbort("Detectada troca de aplicativo ou perda de foco do navegador.");
+      }
+    });
+
+    async function triggerFraudAbort(reason) {
+      if (!state.isQuizActive || state.isTestMode) return;
+      state.isQuizActive = false;
+      state.isFraudModalOpen = true;
+      removeActiveSession();
+
+      const record = {
+        student: state.currentUser,
+        studentKey: studentKeyOf(state.currentUser),
+        quizId: state.currentQuizId,
+        score: 0.0,
+        percentage: 0,
+        date: new Date().toLocaleString("pt-BR"),
+        status: "Anulada (Saída da Página)",
+        missed: state.activeQuestions.map(q => q.id),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      try {
+        if (db) await db.collection("attempts").add(record);
+      } catch (e) {
+        console.error("Erro ao registrar anulação:", e);
+      }
+
+      document.getElementById("modal-fraud").style.display = "flex";
+    }
+
+    function dismissFraudAndReset() {
+      document.getElementById("modal-fraud").style.display = "none";
+      state.isFraudModalOpen = false;
+      returnToLogin();
+    }
+
+    /* =========================================================================
+       LEITOR DA APOSTILA INTEGRAL
+       ========================================================================= */
+    function openApostilaModal() {
+      state.isApostilaModalOpen = true;
+      document.getElementById("modal-apostila").style.display = "flex";
+      switchFullChapter(state.currentQuizId);
+    }
+
+    function closeApostilaModal() {
+      state.isApostilaModalOpen = false;
+      document.getElementById("modal-apostila").style.display = "none";
+    }
+
+    function switchFullChapter(capId) {
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+      const targetBtn = document.getElementById(`tab-${capId.replace('cap', 'c')}`);
+      if (targetBtn) targetBtn.classList.add("active");
+
+      document.querySelectorAll(".full-chapter").forEach(ch => ch.classList.remove("active"));
+      const targetChapter = document.getElementById(`text-${capId}`);
+      if (targetChapter) {
+        targetChapter.classList.add("active");
+        document.getElementById("apostila-body").scrollTop = 0;
+      }
+    }
+
+    /* =========================================================================
+       PAINEL DOCENTE EM TEMPO REAL (FIREBASE onSnapshot)
+       ========================================================================= */
+    let latestAttempts = [];
+    let latestTestRecords = [];
+
+    function startTeacherDashboard() {
+      showFirebaseWarningIfNeeded();
+      stopTeacherDashboard(); // garante que não há listeners duplicados
+
+      if (!db) {
+        renderMissingRecordsPlaceholders();
+        return;
+      }
+
+      // 1. Tentativas oficiais (notas) — tempo real
+      const unsubAttempts = db.collection("attempts").onSnapshot((snap) => {
+        latestAttempts = snap.docs.map(d => d.data());
+        renderOfficialMetrics();
+      }, (err) => console.error("Erro no listener de attempts:", err));
+
+      // 2. Registros de acesso "teste" — tempo real
+      const unsubTests = db.collection("testAccess").onSnapshot((snap) => {
+        latestTestRecords = snap.docs.map(d => d.data());
+        renderTestAccessTable();
+      }, (err) => console.error("Erro no listener de testAccess:", err));
+
+      // 3. Sessões ativas (quem está fazendo a prova agora) — tempo real
+      const unsubSessions = db.collection("activeSessions").onSnapshot((snap) => {
+        latestOnlineSessions = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderOnlineNowTable();
+      }, (err) => console.error("Erro no listener de activeSessions:", err));
+
+      teacherUnsubscribers = [unsubAttempts, unsubTests, unsubSessions];
+
+      // Recalcula "conectado há Xs" e remove quem ficou 25s+ sem heartbeat,
+      // mesmo sem chegar um novo snapshot.
+      onlineListRefreshTimer = setInterval(renderOnlineNowTable, 3000);
+    }
+
+    function renderMissingRecordsPlaceholders() {
+      document.getElementById("test-records-table-body").innerHTML =
+        `<tr><td colspan="5" class="empty-state">Banco de dados não configurado.</td></tr>`;
+      document.getElementById("ranking-table-body").innerHTML =
+        `<tr><td colspan="9" class="empty-state">Banco de dados não configurado.</td></tr>`;
+      document.getElementById("online-now-table-body").innerHTML =
+        `<tr><td colspan="4" class="empty-state">Banco de dados não configurado.</td></tr>`;
+    }
+
+    function renderOnlineNowTable() {
+      const now = Date.now();
+      const online = latestOnlineSessions.filter(s => {
+        if (!s.lastHeartbeat || typeof s.lastHeartbeat.toMillis !== "function") return true; // recém-criado, ainda sem timestamp do servidor
+        return (now - s.lastHeartbeat.toMillis()) < 25000;
+      });
+
+      document.getElementById("kpi-online-now").innerText = online.length;
+
+      const tbody = document.getElementById("online-now-table-body");
+      if (online.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Nenhum estudante conectado no momento.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = "";
+      online
+        .sort((a, b) => (a.student || "").localeCompare(b.student || ""))
+        .forEach(s => {
+          const secondsAgo = (s.lastHeartbeat && typeof s.lastHeartbeat.toMillis === "function")
+            ? Math.max(0, Math.round((now - s.lastHeartbeat.toMillis()) / 1000))
+            : 0;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><strong>${s.student || "-"}</strong></td>
+            <td>${s.quizLabel || "-"}</td>
+            <td>Questão ${s.currentIndex || 1} de ${s.totalQuestions || "-"}</td>
+            <td>${secondsAgo}s</td>
+          `;
+          tbody.appendChild(tr);
+        });
+    }
+
+    function renderTestAccessTable() {
+      const testRecords = latestTestRecords;
+      document.getElementById("kpi-test-total").innerText = testRecords.length;
+
+      const testSuccessCount = testRecords.filter(t => t.success === true).length;
+      document.getElementById("kpi-test-success").innerText = testSuccessCount;
+
+      const testIssueCount = testRecords.filter(t => t.success === false).length;
+      document.getElementById("kpi-test-issues").innerText = testIssueCount;
+
+      const testTbody = document.getElementById("test-records-table-body");
+      testTbody.innerHTML = "";
+
+      if (testRecords.length === 0) {
+        testTbody.innerHTML = `<tr><td colspan="5" class="empty-state">Nenhum acesso de teste registrado até o momento.</td></tr>`;
+      } else {
+        const reversed = [...testRecords].reverse();
+        reversed.forEach((t, idx) => {
+          const tr = document.createElement("tr");
+          const badge = t.success
+            ? `<span class="badge badge-success">✅ Conseguiu Acessar</span>`
+            : `<span class="badge badge-danger">⚠️ Relatou Dificuldade</span>`;
+
+          tr.innerHTML = `
+            <td><strong>#${testRecords.length - idx}</strong></td>
+            <td><strong>${t.student}</strong></td>
+            <td>${t.answer === "Sim" ? "Sim, acessou normalmente" : "Não, com problemas"}</td>
+            <td style="font-size: 0.85rem; color: var(--text-muted);">${t.date}</td>
+            <td>${badge}</td>
+          `;
+          testTbody.appendChild(tr);
+        });
+      }
+    }
+
+    function renderOfficialMetrics() {
+      const allRecords = latestAttempts;
+      const totalAttempts = allRecords.length;
+      document.getElementById("kpi-total-attempts").innerText = totalAttempts;
+
+      const fraudAttempts = allRecords.filter(r => (r.status || "").includes("Anulada")).length;
+      document.getElementById("kpi-fraud-count").innerText = fraudAttempts;
+
+      const studentsMap = {};
+
+      allRecords.forEach(r => {
+        const studentKey = (r.studentKey || (r.student || "").trim().toLowerCase());
+        if (!studentsMap[studentKey]) {
+          studentsMap[studentKey] = {
+            studentName: r.student,
+            bestCap1: null,
+            bestCap2: null,
+            bestCap3: null,
+            bestCap4: null,
+            attempts: 0,
+            lastDate: r.date
+          };
+        }
+
+        studentsMap[studentKey].attempts += 1;
+        studentsMap[studentKey].lastDate = r.date;
+
+        if (r.status === "Concluído") {
+          if (r.quizId === 'cap1') studentsMap[studentKey].bestCap1 = Math.max(studentsMap[studentKey].bestCap1 ?? 0, r.score);
+          if (r.quizId === 'cap2') studentsMap[studentKey].bestCap2 = Math.max(studentsMap[studentKey].bestCap2 ?? 0, r.score);
+          if (r.quizId === 'cap3') studentsMap[studentKey].bestCap3 = Math.max(studentsMap[studentKey].bestCap3 ?? 0, r.score);
+          if (r.quizId === 'cap4') studentsMap[studentKey].bestCap4 = Math.max(studentsMap[studentKey].bestCap4 ?? 0, r.score);
+        }
+      });
+
+      const studentList = Object.values(studentsMap).map(s => {
+        const c1 = s.bestCap1 ?? 0.0;
+        const c2 = s.bestCap2 ?? 0.0;
+        const c3 = s.bestCap3 ?? 0.0;
+        const c4 = s.bestCap4 ?? 0.0;
+        const finalGrade = (c1 + c2 + c3 + c4) / 4.0;
+        const isComplete = (s.bestCap1 !== null && s.bestCap2 !== null && s.bestCap3 !== null && s.bestCap4 !== null);
+        return {
+          ...s,
+          c1, c2, c3, c4,
+          finalGrade,
+          isComplete
+        };
+      });
+
+      document.getElementById("kpi-active-students").innerText = studentList.length;
+
+      if (studentList.length > 0) {
+        const sumFinalGrades = studentList.reduce((acc, s) => acc + s.finalGrade, 0.0);
+        const classAvg = sumFinalGrades / studentList.length;
+        document.getElementById("kpi-class-avg").innerText = classAvg.toFixed(1);
+      } else {
+        document.getElementById("kpi-class-avg").innerText = "0.0";
+      }
+
+      studentList.sort((a, b) => b.finalGrade - a.finalGrade);
+
+      const tbody = document.getElementById("ranking-table-body");
+      tbody.innerHTML = "";
+
+      if (studentList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" class="empty-state">Nenhum registro oficial de avaliação encontrado no sistema.</td></tr>`;
+      } else {
+        studentList.forEach((s, idx) => {
+          const tr = document.createElement("tr");
+
+          let statusBadge = "";
+          if (s.isComplete) {
+            statusBadge = s.finalGrade >= 6.0
+              ? `<span class="badge badge-success">Aprovado</span>`
+              : `<span class="badge badge-danger">Reprovado</span>`;
+          } else {
+            statusBadge = `<span class="badge badge-warning">Em Andamento</span>`;
+          }
+
+          tr.innerHTML = `
+            <td><strong>#${idx + 1}</strong></td>
+            <td><strong>${s.studentName}</strong></td>
+            <td>${s.bestCap1 !== null ? s.bestCap1.toFixed(1) : '<span style="color:#bbb;">-</span>'}</td>
+            <td>${s.bestCap2 !== null ? s.bestCap2.toFixed(1) : '<span style="color:#bbb;">-</span>'}</td>
+            <td>${s.bestCap3 !== null ? s.bestCap3.toFixed(1) : '<span style="color:#bbb;">-</span>'}</td>
+            <td>${s.bestCap4 !== null ? s.bestCap4.toFixed(1) : '<span style="color:#bbb;">-</span>'}</td>
+            <td><strong style="color: var(--primary); font-size: 1.1rem;">${s.finalGrade.toFixed(1)}</strong></td>
+            <td>${s.attempts} ${s.attempts > 1 ? 'tentativas' : 'tentativa'}</td>
+            <td>${statusBadge}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // Diagnóstico de Questões Mais Erradas
+      const missedContainer = document.getElementById("most-missed-questions-container");
+      missedContainer.innerHTML = "";
+
+      if (allRecords.length === 0) {
+        missedContainer.innerHTML = `
+          <div class="empty-state">
+            Nenhuma tentativa registrada até o momento. As análises surgirão conforme os estudantes realizarem as avaliações.
+          </div>
+        `;
+        return;
+      }
+
+      const missCounts = {};
+      allRecords.forEach(record => {
+        if (record.missed && Array.isArray(record.missed)) {
+          record.missed.forEach(qId => {
+            missCounts[qId] = (missCounts[qId] || 0) + 1;
+          });
+        }
+      });
+
+      const allQMap = {};
+      Object.keys(QUESTION_BANK).forEach(qKey => {
+        QUESTION_BANK[qKey].forEach(q => {
+          allQMap[q.id] = q;
+        });
+      });
+
+      const sortedMisses = Object.keys(missCounts)
+        .map(qId => ({
+          id: qId,
+          count: missCounts[qId],
+          percent: ((missCounts[qId] / totalAttempts) * 100).toFixed(0),
+          data: allQMap[qId]
+        }))
+        .sort((a, b) => b.count - a.count);
+
+      if (sortedMisses.length === 0) {
+        missedContainer.innerHTML = `
+          <div style="padding: 16px; background: #e8f5e9; color: #2e7d32; border-radius: 8px;">
+            Nenhum erro registrado até o momento! Todos os estudantes acertaram 100% das questões sorteadas.
+          </div>
+        `;
+        return;
+      }
+
+      sortedMisses.slice(0, 5).forEach(item => {
+        const div = document.createElement("div");
+        div.className = "question-miss-item";
+        div.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; gap: 10px;">
+            <span class="question-miss-title">${item.data ? item.data.prompt : item.id}</span>
+            <span style="font-weight: 800; color: var(--danger); font-size: 0.92rem; white-space: nowrap;">${item.percent}% de erro da turma (${item.count} vezes)</span>
+          </div>
+          <div class="question-miss-bar-bg">
+            <div class="question-miss-bar-fill" style="width: ${item.percent}%;"></div>
+          </div>
+        `;
+        missedContainer.appendChild(div);
+      });
+    }
+
+    async function clearAllData() {
+      if (!confirm("Deseja realmente apagar todos os registros de avaliações da turma? Esta ação é irreversível.")) return;
+      if (!db) return;
+      const snap = await db.collection("attempts").get();
+      const batchDeletes = snap.docs.map(d => d.ref.delete());
+      await Promise.all(batchDeletes);
+    }
+
+    async function clearTestRecords() {
+      if (!confirm("Deseja realmente apagar a lista de registros de acessos do teste?")) return;
+      if (!db) return;
+      const snap = await db.collection("testAccess").get();
+      const batchDeletes = snap.docs.map(d => d.ref.delete());
+      await Promise.all(batchDeletes);
+    }
+
+    function exportTestRecordsCSV() {
+      const testRecords = latestTestRecords;
+      if (testRecords.length === 0) {
+        alert("Não há registros de teste disponíveis para exportação no momento.");
+        return;
+      }
+
+      let csv = "Estudante,Resposta,Data_Hora,Situacao_Acesso\n";
+      testRecords.forEach(t => {
+        csv += `"${t.student}","${t.answer}","${t.date}","${t.status}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `lista_teste_conectividade_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function exportDataCSV() {
+      const allRecords = latestAttempts;
+      if (allRecords.length === 0) {
+        alert("Não há dados reais disponíveis para exportação no momento.");
+        return;
+      }
+
+      const studentsMap = {};
+
+      allRecords.forEach(r => {
+        const studentKey = (r.studentKey || (r.student || "").trim().toLowerCase());
+        if (!studentsMap[studentKey]) {
+          studentsMap[studentKey] = {
+            studentName: r.student,
+            bestCap1: null,
+            bestCap2: null,
+            bestCap3: null,
+            bestCap4: null,
+            attempts: 0
+          };
+        }
+
+        studentsMap[studentKey].attempts += 1;
+
+        if (r.status === "Concluído") {
+          if (r.quizId === 'cap1') studentsMap[studentKey].bestCap1 = Math.max(studentsMap[studentKey].bestCap1 ?? 0, r.score);
+          if (r.quizId === 'cap2') studentsMap[studentKey].bestCap2 = Math.max(studentsMap[studentKey].bestCap2 ?? 0, r.score);
+          if (r.quizId === 'cap3') studentsMap[studentKey].bestCap3 = Math.max(studentsMap[studentKey].bestCap3 ?? 0, r.score);
+          if (r.quizId === 'cap4') studentsMap[studentKey].bestCap4 = Math.max(studentsMap[studentKey].bestCap4 ?? 0, r.score);
+        }
+      });
+
+      let csv = "Estudante,Maior_Cap1,Maior_Cap2,Maior_Cap3,Maior_Cap4,Nota_Final,Total_Tentativas,Situacao\n";
+
+      Object.values(studentsMap).forEach(s => {
+        const c1 = s.bestCap1 ?? 0.0;
+        const c2 = s.bestCap2 ?? 0.0;
+        const c3 = s.bestCap3 ?? 0.0;
+        const c4 = s.bestCap4 ?? 0.0;
+        const finalGrade = (c1 + c2 + c3 + c4) / 4.0;
+        const isComplete = (s.bestCap1 !== null && s.bestCap2 !== null && s.bestCap3 !== null && s.bestCap4 !== null);
+        const status = isComplete ? (finalGrade >= 6.0 ? "Aprovado" : "Reprovado") : "Em Andamento";
+
+        csv += `"${s.studentName}",${c1.toFixed(1)},${c2.toFixed(1)},${c3.toFixed(1)},${c4.toFixed(1)},${finalGrade.toFixed(1)},${s.attempts},"${status}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `relatorio_final_entomologia_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Ao sair da página (fechar aba/app) tentamos remover a sessão ativa.
+    window.addEventListener("pagehide", () => {
+      if (db && state.sessionId) {
+        db.collection("activeSessions").doc(state.sessionId).delete().catch(() => {});
+      }
+    });
+  </script>
+</body>
+</html>
